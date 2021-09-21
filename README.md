@@ -15,6 +15,7 @@ Los roles del equipo SCRUM son:
 **Scrum máster:** 
 Fabiola Jiménez
 **Equipo de desarrollo:**
+
 - Karen Zamora Villalobos
 - Gerardo Campos Badilla 
 - Fabiola Jiménez González
