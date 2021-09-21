@@ -13,7 +13,7 @@ Este repositorio está creado para el proyecto integrador del curso de Ingenier�
 Los roles del equipo SCRUM son:
 
 **Scrum máster:** 
-Fabiola Jiménez
+- Fabiola Jiménez
 **Equipo de desarrollo:**
 
 - Karen Zamora Villalobos
