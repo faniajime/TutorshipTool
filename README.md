@@ -24,3 +24,7 @@ Los roles del equipo SCRUM son:
 - Karen Zamora Villalobos
 - Gerardo Campos Badilla 
 - Fabiola Jiménez González
+
+#### Calendario
+
+El calendario de trabajo se encuentra en la siguiente dirección web: https://calendar.google.com/calendar/u/0?cid=a2I4aHVsZTVtdGhkYnQ1Y3V2M2pkbGlzZmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ
