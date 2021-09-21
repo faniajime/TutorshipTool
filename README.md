@@ -8,7 +8,7 @@ Este repositorio est√° creado para el proyecto integrador del curso de Ingenier√
 
 ### Entre las especificaciones del manejo del proyecto se encuentran: 
 
-####Roles
+#### Roles
 
 Los roles del equipo SCRUM son:
 
