@@ -28,3 +28,10 @@ Los roles del equipo SCRUM son:
 #### Calendario
 
 El calendario de trabajo se encuentra en la siguiente dirección web: https://calendar.google.com/calendar/u/0?cid=a2I4aHVsZTVtdGhkYnQ1Y3V2M2pkbGlzZmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ
+
+#### PBI's
+
+- Historia de usuario [HU]
+- Investigación [INV]
+- Historia de trabajo [HT]
+- Historia técnica [TEC]
