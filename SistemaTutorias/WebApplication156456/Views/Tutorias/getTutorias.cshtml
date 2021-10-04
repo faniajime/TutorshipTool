@@ -1,0 +1,31 @@
+﻿@{ ViewBag.Title = "Tutorías"; }
+<DOCTYPE html>
+    <html>
+    <head>
+        <title>Lista de tutorías</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <br />
+        <h1>Tutorías disponibles</h1>
+        <p>En esta página podrá encontrar las tutorías que se encuentran disponibles. </p>
+        <br />
+        <p>Escriba en la casilla para filtrar las tutorías:</p>
+        <input class="form-control" id="myInput" type="text" placeholder="Buscar.." asp-for="filtrarTutorias">
+        <br />
+        <div class="list-group">
+
+            @for (var index = 0; index < @ViewBag.tutorias.Count; index++)
+            {
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading"><b>Nombre del curso: @ViewBag.tutorias[index].curso</b></h4>
+                <p class="list-group-item-text">Profesor: @ViewBag.tutorias[index].tutor</p>
+                <p class="list-group-item-text">Modalidad: @ViewBag.tutorias[index].tipo_sesion</p>
+                <p class="list-group-item-text">Cantidad de estudiantes: @ViewBag.tutorias[index].cantidad_estudiantes</p>
+                <p class="list-group-item-text">Calificación tutoría: @ViewBag.tutorias[index].calificacion_tutoria</p>
+
+            </a>    }
+        </div>
+
+    </body>
+</html>
