@@ -106,3 +106,7 @@ C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\Sist
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.CopyComplete
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.dll
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.pdb
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.dll
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.Mvc.dll
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.xml
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.Mvc.xml

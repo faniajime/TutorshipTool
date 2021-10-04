@@ -11,21 +11,36 @@ namespace PruebaAzure.Controllers
 {
     public class TutoriasController : Controller
     {
-        public ActionResult getTutorias()
+        public ActionResult getTutorias(string buscar)
         {
             TutoriaHandler accessoDatos = new TutoriaHandler();
-            ViewBag.tutorias = accessoDatos.obtenerTutorias();
-            return View();
-        }
-
-        public ActionResult filtrarTutorias(string filtro)
-        {
-            System.Diagnostics.Debug.WriteLine(filtro);
             List<Tutoria> tutorias = new List<Tutoria>();
-            tutorias = ViewBag.tutorias;
-            tutorias = tutorias.FindAll(x => x.curso.Contains(filtro) || x.tutor.Contains(filtro) || x.tipo_sesion.Contains(filtro));
-            ViewBag.tutorias = tutorias;
-            return View();
+            tutorias = accessoDatos.obtenerTutorias();
+            bool empty = false;
+            ViewBag.empty = empty;
+            if (buscar != null)
+            {
+                System.Diagnostics.Debug.WriteLine(buscar);
+                tutorias = tutorias.FindAll(x => x.curso.Contains(buscar) || x.tutor.Contains(buscar) || x.tipo_sesion.Contains(buscar));
+                ViewBag.tutorias = tutorias;
+
+                if (tutorias.Any())
+                {
+                    return View();
+                }
+                else
+                {
+                    empty = true;
+                    ViewBag.empty = empty;
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.tutorias = tutorias;
+                return View();
+            }
+            
         }
     }
 }
