@@ -181,7 +181,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\TutoriaHandler.cs" />
+    <Compile Include="Migrations\202110040218255_InitialCreate.cs" />
+    <Compile Include="Migrations\202110040218255_InitialCreate.Designer.cs">
+      <DependentUpon>202110040218255_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110251922545_InitialModel.cs" />
+    <Compile Include="Migrations\202110251922545_InitialModel.Designer.cs">
+      <DependentUpon>202110251922545_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Tutor.cs" />
     <Compile Include="Models\TutoriaModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -265,6 +277,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202110040218255_InitialCreate.resx">
+      <DependentUpon>202110040218255_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110251922545_InitialModel.resx">
+      <DependentUpon>202110251922545_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
