@@ -114,3 +114,5 @@ C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\Sist
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel.resources
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel1.resources
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.SeedUsers.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData1.resources

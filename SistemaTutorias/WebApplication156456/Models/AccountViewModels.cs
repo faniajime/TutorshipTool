@@ -65,6 +65,16 @@ namespace WebApplication156456.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellidos")]
+        public string Apellidos { get; set; }
+        [Required]
+        [Display(Name = "Descripcion")]
+        public string Descripcion { get; set; }
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

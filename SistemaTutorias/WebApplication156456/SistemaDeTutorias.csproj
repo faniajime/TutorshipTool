@@ -198,6 +198,14 @@
     <Compile Include="Migrations\202110252053447_SeedUsers.Designer.cs">
       <DependentUpon>202110252053447_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110252149143_MoreData.cs" />
+    <Compile Include="Migrations\202110252149143_MoreData.Designer.cs">
+      <DependentUpon>202110252149143_MoreData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110252157089_MoreData1.cs" />
+    <Compile Include="Migrations\202110252157089_MoreData1.Designer.cs">
+      <DependentUpon>202110252157089_MoreData1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Curso.cs" />
@@ -301,6 +309,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110252053447_SeedUsers.resx">
       <DependentUpon>202110252053447_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110252149143_MoreData.resx">
+      <DependentUpon>202110252149143_MoreData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110252157089_MoreData1.resx">
+      <DependentUpon>202110252157089_MoreData1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
