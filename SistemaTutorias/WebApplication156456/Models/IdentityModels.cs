@@ -22,7 +22,7 @@ namespace WebApplication156456.Models
     {
         public DbSet<Persona> personas { get; set; }
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("PICONNECTION", throwIfV1Schema: false)
         {
         }
 

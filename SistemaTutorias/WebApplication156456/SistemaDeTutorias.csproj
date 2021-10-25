@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="Controllers\TutoriaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,10 +190,19 @@
     <Compile Include="Migrations\202110251922545_InitialModel.Designer.cs">
       <DependentUpon>202110251922545_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110251949252_InitialModel1.cs" />
+    <Compile Include="Migrations\202110251949252_InitialModel1.Designer.cs">
+      <DependentUpon>202110251949252_InitialModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110252053447_SeedUsers.cs" />
+    <Compile Include="Migrations\202110252053447_SeedUsers.Designer.cs">
+      <DependentUpon>202110252053447_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\Persona.cs" />
+    <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Tutor.cs" />
     <Compile Include="Models\TutoriaModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -259,6 +269,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tutorias\getTutorias.cshtml" />
+    <Content Include="Views\Tutor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -284,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110251922545_InitialModel.resx">
       <DependentUpon>202110251922545_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110251949252_InitialModel1.resx">
+      <DependentUpon>202110251949252_InitialModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110252053447_SeedUsers.resx">
+      <DependentUpon>202110252053447_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

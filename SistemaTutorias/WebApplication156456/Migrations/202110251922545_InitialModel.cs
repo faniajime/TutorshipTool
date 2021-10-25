@@ -8,7 +8,7 @@ namespace WebApplication156456.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Personas",
+                "dbo.PERSONA",
                 c => new
                     {
                         id = c.Int(nullable: false, identity: true),
@@ -25,7 +25,7 @@ namespace WebApplication156456.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.Personas");
+            DropTable("dbo.PERSONA");
         }
     }
 }
