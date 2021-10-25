@@ -103,10 +103,16 @@ C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\Microsoft.
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.AssemblyReference.cache
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.CoreCompileInputs.cache
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.CopyComplete
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.dll
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.pdb
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.dll
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.Mvc.dll
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.xml
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.Mvc.xml
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialCreate.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.GenerateResource.cache
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel1.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.SeedUsers.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData.resources
+C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData1.resources
