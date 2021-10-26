@@ -71,7 +71,7 @@ namespace WebApplication156456.Models
         [Required]
         [Display(Name = "Apellidos")]
         public string Apellidos { get; set; }
-        [Required]
+
         [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
         [Required]

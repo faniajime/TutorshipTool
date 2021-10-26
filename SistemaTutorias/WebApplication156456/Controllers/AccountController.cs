@@ -153,9 +153,7 @@ namespace WebApplication156456.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
-                    UserName = model.Nombre + ' ' + model.Apellidos,
-                    Descripcion = model.Descripcion, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellidos = model.Apellidos};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -164,7 +162,7 @@ namespace WebApplication156456.Controllers
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
                     //roleManager.CreateAsync(new IdentityRole("Administrator"));
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    //await UserManager.AddToRoleAsync(user.Id, "Administrator");
+                    // await UserManager.AddToRoleAsync(user.Id, "Administrator");
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
