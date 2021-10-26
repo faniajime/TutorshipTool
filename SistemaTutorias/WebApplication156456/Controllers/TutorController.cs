@@ -14,7 +14,6 @@ namespace WebApplication156456.Controllers
         
         public ActionResult Index()
         {
-
             return View();
         }
     }
