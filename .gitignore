@@ -1,3 +1,5 @@
+*.sql
+
 .vs\
 SistemaTutorias/WebApplication156456\obj\release
 slnx.sqlite
