@@ -35,3 +35,4 @@ El calendario de trabajo se encuentra en la siguiente dirección web: https://ca
 - Investigación [INV]
 - Historia de trabajo [HT]
 - Historia técnica [TEC]
+- Arreglo de un bug [BUG]
