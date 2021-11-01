@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebApplication156456.Models;
+using WebApplication156456.Handlers;
 
 namespace WebApplication156456.Controllers
 {
@@ -155,6 +156,9 @@ namespace WebApplication156456.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellidos = model.Apellidos, Rol = model.UserRol};
+                var persona = new Persona { nombre = model.Nombre, apellido = model.Apellidos, email = model.Email, contrasena = model.Password, descripcion = model.Descripcion, persona_id = user.Id };
+                var registrationHandler = new RegistrationHandler();
+                registrationHandler.crearPersona(persona);
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -165,11 +169,15 @@ namespace WebApplication156456.Controllers
   
                     if (Equals(user.Rol, "Tutor") || Equals(user.Rol, "Tutor y estudiante")){
                         await UserManager.AddToRoleAsync(user.Id, "Tutor");
+                        var tutor = new Tutor { id = user.Id};
+                        registrationHandler.crearTutor(tutor);
                     }
 
                     if (Equals(user.Rol, "Estudiante") || Equals(user.Rol, "Tutor y estudiante")){
 
                         await UserManager.AddToRoleAsync(user.Id, "Estudiante");
+                        var estudiante = new Estudiante { id = user.Id };
+                        registrationHandler.crearEstudiante(estudiante);
                     }
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     //Temp code

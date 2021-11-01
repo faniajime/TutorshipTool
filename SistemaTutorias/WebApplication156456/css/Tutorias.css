@@ -1,0 +1,44 @@
+﻿h1 {
+    text-align: center;
+    font-family: 'Enriqueta', arial, serif;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.card-head
+{   
+    padding:5px;
+    background-color: #3498DB;
+    border-block-color: gray;
+}
+.card-header {
+    color: white;
+    background-color: #3498DB;
+    padding: 5px;
+}
+
+
+hr {
+    height: 1px;
+    background-color: #ccc;
+    border: none;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #3498DB !important;
+}
+
+body {
+    font-family: 'Enriqueta', arial, serif;
+    background-color: #D6EAF8;
+}
+
+.card {
+    background-color: white;
+}
+
+.card-body{
+    padding:10px;
+}
