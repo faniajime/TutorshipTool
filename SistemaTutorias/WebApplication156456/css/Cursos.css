@@ -1,0 +1,34 @@
+﻿h1 {
+    text-align: center;
+    font-family: 'Enriqueta', arial, serif;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+th {
+    text-align: center;
+    background-color: #3498DB;
+    
+}
+
+td {
+    text-align: center;
+    background-color: white;
+}
+
+.div1 {
+    background-color: white;
+    margin-top:0%;
+    padding-top:0px;
+}
+
+body {
+    background-color: #D6EAF8;
+}
+
+table {
+    border-radius: 25px;
+    
+}
