@@ -1,0 +1,100 @@
+﻿@model WebApplication156456.Models.MenuTutorModel
+@{
+    ViewBag.Title = "Add Tutorship";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    .customHeader {
+        text-align: left;
+        font-weight: bold
+    }
+</style>
+
+<html lang="es">
+    <head>
+        <title>Agregar Nueva Tutoría</title>
+    </head>
+
+    <body>
+        <div class="container-fluid overflow-hidden tab-content" style="text-align:left;">
+
+            <div id="id_addTutorship">
+                <div>
+                    <br />
+                    <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+                    <br />
+                    <h3 class="customHeader">Agregar Nueva Tutoría</h3>
+                </div>
+            </div>
+
+            <div id="id_addTutorship_inputFields" class="list-group">
+                <form action="/MenuTutor/AddThisTutorship" method="post">
+                    <div class="list-group-item row">
+                        <div class="col-md-4">
+                            <h4>Seleccionar Curso</h4>
+                            <select id="id_addTutorship_inputFields_dropdownMenu" name="tutorshipCourse" size="11">
+                                @for (int index = 0; index < ViewBag.coursesList.Count; index++) {
+                                    if (index == 0) {
+                                        <option value="@ViewBag.coursesList[index].id" selected>
+                                            @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
+                                        </option>
+                                    } else {
+                                        <option value="@ViewBag.coursesList[index].id">
+                                            @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h4>Modalidad De La Tutoría</h4>
+                            <select id="id_selectCourse_inputFields_dropdownMenu" name="tutorshipModality">
+                                <option value="Virtual" selected>
+                                    Virtual
+                                </option>
+                                <option value="Presencial">
+                                    Presencial
+                                </option>
+                                <option value="Cualquiera">
+                                    Cualquiera
+                                </option>
+                            </select>
+                            <br />
+                            <br />
+
+                            <h4>Cantidad Máxima de Estudiantes</h4>
+                            <input name="inputMaxStudents" type="number" min="1" max="30" value="1" required />
+
+                            <br />
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Tarifa Individual</h4>
+                                    <input name="inputIndividualFare" type="number" min="0" max="100000" value="0" required />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4>Tarifa Grupal</h4>
+                                    <input name="inputGroupFare" type="number" min="0" max="100000" value="0" required />
+                                </div>
+                            </div>
+
+                            <br />
+
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <input id="id_addTutorship_submitInput" class="btn btn-primary btn-lg" name="tutorshipSubmit" type="submit" value="Agregar Esta Tutoría &raquo" onclick="return confirm('Está seguro que quiere agregar esta tutoría?')"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
