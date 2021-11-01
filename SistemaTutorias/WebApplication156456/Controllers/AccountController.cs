@@ -21,6 +21,7 @@ namespace WebApplication156456.Controllers
 
         public AccountController()
         {
+            
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -153,17 +154,31 @@ namespace WebApplication156456.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellidos = model.Apellidos};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellidos = model.Apellidos, Rol = model.UserRol};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("Tutor"));
+                    await roleManager.CreateAsync(new IdentityRole("Estudiante"));
+  
+                    if (Equals(user.Rol, "Tutor") || Equals(user.Rol, "Tutor y estudiante")){
+                        await UserManager.AddToRoleAsync(user.Id, "Tutor");
+                    }
+
+                    if (Equals(user.Rol, "Estudiante") || Equals(user.Rol, "Tutor y estudiante")){
+
+                        await UserManager.AddToRoleAsync(user.Id, "Estudiante");
+                    }
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     //Temp code
-                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    //roleManager.CreateAsync(new IdentityRole("Administrator"));
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    // await UserManager.AddToRoleAsync(user.Id, "Administrator");
-                    
+                    //
+                    //
+                    //
+                    //
+                    // 
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -226,7 +241,7 @@ namespace WebApplication156456.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
+        } 
 
         //
         // GET: /Account/ForgotPasswordConfirmation

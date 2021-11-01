@@ -111,8 +111,3 @@ C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\bin\PagedList.Mvc.xml
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialCreate.resources
 C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\SistemaDeTutorias.csproj.GenerateResource.cache
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel.resources
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.InitialModel1.resources
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.SeedUsers.resources
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData.resources
-C:\Repositorios\pi_ingebases\SistemaTutorias\WebApplication156456\obj\Debug\WebApplication156456.Migrations.MoreData1.resources
