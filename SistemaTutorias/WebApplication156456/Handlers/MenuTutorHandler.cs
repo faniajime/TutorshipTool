@@ -17,17 +17,18 @@ namespace WebApplication156456.Handlers
             sqlConnection = new SqlConnection(connectionRoute);
         }
 
-        public List<Curso> obtainAllCourses() {
-            List<Curso> coursesList = new List<Curso>();
+        public List<Cursos> obtainAllCourses() {
+            List<Cursos> coursesList = new List<Cursos>();
             string sqlQuery = "SELECT * FROM CURSO";
             DataTable resultingTable = obtainDataTableFromQuery(sqlQuery);
 
             foreach (DataRow row in resultingTable.Rows) {
                 coursesList.Add(
-                    new Curso {
+                    new Cursos
+                    {
                         nombre = Convert.ToString(row["nombre"]),
                         detalles = Convert.ToString(row["detalles"]),
-                        area_especialidad = Convert.ToInt32(row["area_especialidad"]),
+                        area_especialidad = Convert.ToString(row["area_especialidad"]),
                         id = Convert.ToString(row["id"])
                     }
                 );
