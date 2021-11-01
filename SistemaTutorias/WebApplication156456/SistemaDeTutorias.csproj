@@ -178,12 +178,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
-    <Compile Include="Controllers\TutoriaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\CursosHandler.cs" />
-    <Compile Include="Handlers\TutoriaHandler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cursos.cs" />
     <Compile Include="Models\Estudiante.cs" />
@@ -254,14 +252,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Tutorias\getTutorias.cshtml" />
     <Content Include="Views\Tutor\Index.cshtml" />
     <Content Include="Views\Cursos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\TutoriaHandler\" />
-    <Folder Include="Views\Tutoria\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
