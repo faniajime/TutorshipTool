@@ -1,0 +1,146 @@
+﻿@model WebApplication156456.Models.RegisterViewModel
+<!--IEnumerable<WebApplication156456.Models.Cursos>-->
+
+@{
+    ViewBag.Title = "cursos";
+}
+
+<html>
+<head>
+    <title>Lista de cursos</title>
+
+
+</head>
+<body>
+    <h2>Lista de cursos disponibles</h2>
+    <div>
+        <select name="filters" id="filters" , class="browser-default custom-select">
+            <option value="filtrar" selected=""> Filtrar por</option>
+            <option value="area">Area</option>
+            <option value="nombre">Nombre</option>
+            <option value="sigla">Sigla</option>
+        </select>
+
+        <input type="text" id="searchText" name="searchText" placeholder="Buscar" />
+
+        @using (Html.BeginForm("Index", "Cursos", FormMethod.Get))
+        {
+
+
+        }
+    </div>
+    <br />
+    <div>
+        <table border="1">
+            <tr>
+                <th>Sigla</th>
+                <th>Nombre</th>
+                <th>Detalles</th>
+                <th>Area</th>
+            </tr>
+            @foreach (var curso in ViewBag.cursos)
+            {
+                <tr>
+                    <td id="sigla">@curso.id</td>
+                    <td id="nombre">@curso.nombre</td>
+                    <td id="detalles">@curso.detalles</td>
+                    <td id="area">@curso.area_especialidad</td>
+                </tr>
+            }
+        </table>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+        <!--Script para recuperar valor de dropdownlist-->
+        <script type="text/javascript">
+            @*$('#filters').change(function () {
+                var value = $(this).val();
+
+                if (value != "Filtrar")
+                {
+                     $.ajax({
+                     url: "@Url.Action("search")",
+                     method: "POST",
+                     data: { selectedValue: value },
+                     dataType: "text",
+                     async: true
+                     });
+                }
+            });*@
+
+            var value="";
+
+            $('#filters').change(function () {
+                value = $(this).val();
+            });
+
+            $('#searchText').on("keyup", function () {
+                var textEntered = $(this).val();
+                $("table tr").each(function (cursos) {
+                    if (cursos !== 0)
+                    {
+                        if (value != "" && value != "filtrar") {
+                            var id = $(this).find("#" + value).text();
+                            if (id.indexOf(textEntered) < 0 && id.toLowerCase().indexOf(textEntered.toLowerCase()) < 0) {
+                                $(this).hide();
+                            }
+                            else {
+                                $(this).show();
+                            }
+                        }
+                        else
+                        {
+                            var id = $(this).find("#nombre").text();
+                            if (id.indexOf(textEntered) < 0 && id.toLowerCase().indexOf(textEntered.toLowerCase()) < 0) {
+                                $(this).hide();
+                            }
+                            else {
+                                $(this).show();
+                            }
+                        }
+                    }
+                })
+            });
+        </script>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+
+    <div class="list-group">
+        @if (@ViewBag.empty)
+        {
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">No se encontraron resultados</h4>
+            </a>
+        }
+        else
+        {
+            for (var index = 0; index < @ViewBag.cursos.Count; index++)
+            {
+                <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading"><b>Siglas del curso: @ViewBag.cursos[index].id</b></h4>
+                    <p class="list-group-item-text">Nombre: @ViewBag.cursos[index].nombre</p>
+                    <p class="list-group-item-text">Detalles: @ViewBag.cursos[index].detalles</p>
+                    <p class="list-group-item-text">Área a la que pertenece: @ViewBag.cursos[index].area_especialidad</p>
+                </a>
+            }
+        }
+    </div>
+        -->
+
+</body>
+</html>
+
+
