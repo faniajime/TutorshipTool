@@ -64,6 +64,8 @@ namespace WebApplication156456.Models
 
     public class RegisterViewModel
     {
+ 
+
         [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
@@ -80,6 +82,10 @@ namespace WebApplication156456.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Rol de Usuario")]
+        public string UserRol { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "La {0} tiene que ser de al menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Contraseña")]
@@ -88,7 +94,11 @@ namespace WebApplication156456.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
+
+
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

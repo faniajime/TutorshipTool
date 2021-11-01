@@ -5,10 +5,7 @@ using System.Web;
 
 namespace WebApplication156456.Models
 {
-    public class Tutor
+    public class Admministrador: ApplicationUser
     {
-        public string region { get; set; }
-        public string id { get; set; }
-
     }
 }

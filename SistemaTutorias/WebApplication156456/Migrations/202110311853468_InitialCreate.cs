@@ -8,6 +8,14 @@ namespace WebApplication156456.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Estudiantes",
+                c => new
+                    {
+                        id = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -31,10 +39,23 @@ namespace WebApplication156456.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Tutors",
+                c => new
+                    {
+                        id = c.String(nullable: false, maxLength: 128),
+                        region = c.String(),
+                    })
+                .PrimaryKey(t => t.id);
+            
+            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Nombre = c.String(nullable: false),
+                        Apellidos = c.String(nullable: false),
+                        Descripcion = c.String(),
+                        Rol = c.String(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -92,8 +113,10 @@ namespace WebApplication156456.Migrations
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.Tutors");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Estudiantes");
         }
     }
 }
