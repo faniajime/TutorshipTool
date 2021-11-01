@@ -7,8 +7,11 @@ namespace WebApplication156456.Models
 {
     public class Tutor
     {
-        public string region { get; set; }
         public string id { get; set; }
+        public string region_provinc { get; set; }
+        public string region_canton { get; set; }
+        public string region_distr { get; set; }
+        public string region_detalles { get; set; }
 
     }
 }

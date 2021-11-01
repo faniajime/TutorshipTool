@@ -37,13 +37,13 @@
                 </tr>
                 @foreach (var curso in ViewBag.cursos)
                 {
-                    <tr>
-                        <td id="sigla">@curso.id</td>
-                        <td id="nombre">@curso.nombre</td>
-                        <td id="detalles">@curso.detalles</td>
-                        <td id="area">@curso.area_especialidad</td>
-                        <td><a href="<%: Url.Action(" Ir", "" )%><i class="fas fa-chalkboard-teacher"></i></a></td>               
-                    </tr>
+            <tr>
+                <td id="sigla">@curso.id</td>
+                <td id="nombre">@curso.nombre</td>
+                <td id="detalles">@curso.detalles</td>
+                <td id="area">@curso.area_especialidad</td>
+                <td><a href="@Url.Action("Index","Tutoria", new { courseID = curso.id, courseName = curso.nombre})"><i class="fas fa-chalkboard-teacher"></i></a></td>
+            </tr>
                 }
             </table>
         </center>

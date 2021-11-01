@@ -7,6 +7,6 @@ namespace WebApplication156456.Models
 {
     public class Estudiante
     {
-        public int id { get; set; }
+        public string id { get; set; }
     }
 }
