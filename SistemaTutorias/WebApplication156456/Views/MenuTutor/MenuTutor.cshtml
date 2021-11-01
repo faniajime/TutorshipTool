@@ -1,0 +1,111 @@
+﻿@model WebApplication156456.Models.MenuTutorModel
+@{
+    ViewBag.Title = "MenuTutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    .customHeader {
+        text-align: left;
+        font-weight: bold
+    }
+</style>
+
+<html lang="es">
+    <head>
+        <title style="text-align:center">Editar Perfil de Tutor</title>
+    </head>
+
+    <body>
+        <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
+
+            <div id="id_menuTutor_region">
+                <div>
+                    <h3 class="customHeader">Ajustes de Región</h3>
+                    <br />
+                </div>
+
+                <div id="id_menuTutor_region_inputFields" class="list-group">
+                    <form class="list-group-item" action="/MenuTutor/SubmitRegion" method="post">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h4>Provincia</h4>
+                                <input id="id_menuTutor_region_inputFields_inputProvincia" name="inputProvincia" type="text" value="@ViewBag.province" required/>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Canton</h4>
+                                <input id="id_menuTutor_region_inputFields_inputCanton" name="inputCanton" type="text" value="@ViewBag.city" required />
+                            </div>
+
+                            <div class="col-md-2">
+                                <h4>Distrito</h4>
+                                <input id="id_menuTutor_region_inputFields_inputDistrito" name="inputDistrito" type="text" value="@ViewBag.district" required/>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h4>Detalles De Dirección</h4>
+                                <textarea id="id_menuTutor_region_inputFields_inputDetalles" name="inputDetalles" style="resize:none" cols="50" rows="5" required>@ViewBag.details</textarea>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input id="id_menuTutor_region_inputFields_submit" class="btn btn-primary btn-lg" name="regionSubmit" type="submit" value="Guardar Ajustes de Región &raquo" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div id="id_menuTutor_tutorias">
+                <div>
+                    <h3 class="customHeader">Ajustes de Tutorías</h3>
+                    <br />
+                    <a href="@Url.Action("AddTutorship", "MenuTutor")" class=" btn btn-primary btn-lg">Agregar Nueva Tutoría &raquo</a>
+                    <br />
+                </div>
+
+                <br />
+                <br />
+
+                <div class="list-group">
+                    @if (@ViewBag.tutorshipList.Count == 0) {
+                        <h4>Usted no tiene tutorías registradas</h4>
+                    } else {
+                        for (int index = 0; index < @ViewBag.tutorshipList.Count; index++) { 
+                        <a href="@Url.Action("SelectCourse", "MenuTutor", new { tutorshipID = ViewBag.tutorshipList[index].tutoria_id })" class="list-group-item">
+                            <h4 class="list-group-item-heading"><b>Curso: @ViewBag.tutorshipList[index].curso_id</b></h4>
+                            <p class="list-group-item-text">Nombre Curso: @ViewBag.tutorshipList[index].nombre_curso</p>
+                            <p class="list-group-item-text">ID Tutoría: @ViewBag.tutorshipList[index].tutoria_id</p>
+                            <p class="list-group-item-text">Modalidad: @ViewBag.tutorshipList[index].tipo_sesion</p>
+                            <p class="list-group-item-text">Máximo De Estudiantes: @ViewBag.tutorshipList[index].cantidad_estudiantes</p>
+                            <p class="list-group-item-text">Tarifa Individual: @ViewBag.tutorshipList[index].tarifa_individual</p>
+                            <p class="list-group-item-text">Tarifa Grupal: @ViewBag.tutorshipList[index].tarifa_grupal</p>
+                            <p class="list-group-item-text">Calificación: @ViewBag.tutorshipList[index].calificacion_tutoria</p>
+                        </a>
+                        }
+                    }
+                </div>
+
+                <br />
+                <br />
+
+            </div>
+    </div>
+    </body>
+</html>
+
