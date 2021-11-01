@@ -24,6 +24,10 @@
                 @Html.ActionLink("TutorMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Cursos disponibles", "Index", "Cursos")</li>
+
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

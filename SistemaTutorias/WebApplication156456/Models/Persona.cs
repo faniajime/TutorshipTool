@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication156456.Models
 {
-    public class Admministrador: ApplicationUser
+    public class Persona
     {
     }
 }

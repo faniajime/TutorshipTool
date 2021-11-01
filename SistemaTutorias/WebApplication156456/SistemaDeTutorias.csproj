@@ -174,6 +174,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
@@ -181,15 +182,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\CursosHandler.cs" />
     <Compile Include="Handlers\TutoriaHandler.cs" />
-    <Compile Include="Migrations\202110311853468_InitialCreate.cs" />
-    <Compile Include="Migrations\202110311853468_InitialCreate.Designer.cs">
-      <DependentUpon>202110311853468_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\Cursos.cs" />
     <Compile Include="Models\Estudiante.cs" />
+    <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\Tutor.cs" />
     <Compile Include="Models\TutoriaModel.cs" />
@@ -258,10 +256,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Tutorias\getTutorias.cshtml" />
     <Content Include="Views\Tutor\Index.cshtml" />
+    <Content Include="Views\Cursos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Administrator\" />
     <Folder Include="Views\TutoriaHandler\" />
     <Folder Include="Views\Tutoria\" />
   </ItemGroup>
@@ -277,11 +275,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202110311853468_InitialCreate.resx">
-      <DependentUpon>202110311853468_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
