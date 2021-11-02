@@ -27,7 +27,7 @@ Los roles del equipo SCRUM son:
 
 ### Documentos adicionales
 
-Evidencia de pruebas manuales y otros documentos del sprint: https://drive.google.com/drive/folders/1JnQNyUnuxI8tAUCADEzs9wnqI4FC8-5E?usp=sharing
+Evidencia de pruebas manuales, diagrama de bases, resultados de investigaciones y otros documentos del sprint: https://drive.google.com/drive/folders/1JnQNyUnuxI8tAUCADEzs9wnqI4FC8-5E?usp=sharing
 
 #### Calendario
 
