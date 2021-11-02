@@ -25,6 +25,10 @@ Los roles del equipo SCRUM son:
 - Gerardo Campos Badilla 
 - Fabiola Jiménez González
 
+### Documentos adicionales
+
+Evidencia de pruebas manuales y otros documentos del sprint: https://drive.google.com/drive/folders/1JnQNyUnuxI8tAUCADEzs9wnqI4FC8-5E?usp=sharing
+
 #### Calendario
 
 El calendario de trabajo se encuentra en la siguiente dirección web: https://calendar.google.com/calendar/u/0?cid=a2I4aHVsZTVtdGhkYnQ1Y3V2M2pkbGlzZmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ
