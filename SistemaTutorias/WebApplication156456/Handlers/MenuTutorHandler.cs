@@ -100,10 +100,20 @@ namespace WebApplication156456.Handlers
             DataTable resultDataTable;
 
             if ((resultDataTable = getTutorRegionInfoTable(userId)) != null) {
-                tutorMenuModel.regionProvince = Convert.ToString(resultDataTable.Rows[0]["region_provinc"]);
-                tutorMenuModel.regionCity = Convert.ToString(resultDataTable.Rows[0]["region_canton"]);
-                tutorMenuModel.regionDistrict = Convert.ToString(resultDataTable.Rows[0]["region_distr"]);
-                tutorMenuModel.regionDetails = Convert.ToString(resultDataTable.Rows[0]["region_detalles"]);
+                try
+                {
+                    tutorMenuModel.regionProvince = Convert.ToString(resultDataTable.Rows[0]["region_provinc"]);
+                    tutorMenuModel.regionCity = Convert.ToString(resultDataTable.Rows[0]["region_canton"]);
+                    tutorMenuModel.regionDistrict = Convert.ToString(resultDataTable.Rows[0]["region_distr"]);
+                    tutorMenuModel.regionDetails = Convert.ToString(resultDataTable.Rows[0]["region_detalles"]);
+                }
+                catch 
+                {
+                    tutorMenuModel.regionProvince ="";
+                    tutorMenuModel.regionCity = "";
+                    tutorMenuModel.regionDistrict = "";
+                    tutorMenuModel.regionDetails = "";
+                }
             }
         }
 
