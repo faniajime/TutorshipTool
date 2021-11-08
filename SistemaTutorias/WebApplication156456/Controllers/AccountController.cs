@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebApplication156456.Models;
 using WebApplication156456.Handlers;
+using System.Diagnostics;
 
 namespace WebApplication156456.Controllers
 {
@@ -155,21 +156,24 @@ namespace WebApplication156456.Controllers
 
             if (ModelState.IsValid)
             {
+                
+                var password = model.Password;
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Nombre = model.Nombre, Apellidos = model.Apellidos, Rol = model.UserRol};
-                var persona = new Persona { nombre = model.Nombre, apellido = model.Apellidos, email = model.Email, contrasena = model.Password, descripcion = model.Descripcion, persona_id = user.Id };
-                var registrationHandler = new RegistrationHandler();
-                registrationHandler.crearPersona(persona);
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var person = new Persona { nombre = user.Nombre, apellido = user.Apellidos, email = user.Email, contrasena = password, descripcion = user.Descripcion, persona_id = user.Id };
+                var registrationHandler = new RegistrationHandler();
+                
+                
                 if (result.Succeeded)
                 {
+                    registrationHandler.crearPersona(person);
                     var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     var roleManager = new RoleManager<IdentityRole>(roleStore);
                     await roleManager.CreateAsync(new IdentityRole("Tutor"));
                     await roleManager.CreateAsync(new IdentityRole("Estudiante"));
-  
                     if (Equals(user.Rol, "Tutor") || Equals(user.Rol, "Tutor y estudiante")){
                         await UserManager.AddToRoleAsync(user.Id, "Tutor");
-                        var tutor = new Tutor { id = user.Id};
+                        var tutor = new Tutor { id = user.Id, region_canton = "", region_detalles = "", region_distr = "", region_provinc = "" };
                         registrationHandler.crearTutor(tutor);
                     }
 
@@ -180,19 +184,8 @@ namespace WebApplication156456.Controllers
                         registrationHandler.crearEstudiante(estudiante);
                     }
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    //Temp code
-                    //
-                    //
-                    //
-                    //
-                    // 
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

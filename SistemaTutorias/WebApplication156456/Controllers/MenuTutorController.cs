@@ -14,6 +14,7 @@ using System.Data;
 
 namespace WebApplication156456.Controllers
 {
+    [Authorize(Roles = Roles.Tutor)]
     public class MenuTutorController : Controller {
         public MenuTutorModel tutorMenuInstance { get; }
         private MenuTutorHandler databaseHandler { get; }

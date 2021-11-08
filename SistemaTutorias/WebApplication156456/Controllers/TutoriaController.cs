@@ -5,10 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication156456.Handlers;
+using WebApplication156456.Models;
 
 namespace WebApplication156456.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = Roles.Estudiante)]
     public class TutoriaController : Controller
     {
         

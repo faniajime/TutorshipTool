@@ -13,5 +13,7 @@ namespace WebApplication156456.Models
         public string contrasena { get; set; }
         public string descripcion { get; set; }
         public string persona_id { get; set; }
+
+        public string ToString => nombre + "\n" + apellido + "\n" + email + "\n" + contrasena + "\n" + descripcion + "\n" + persona_id;
     }
 }

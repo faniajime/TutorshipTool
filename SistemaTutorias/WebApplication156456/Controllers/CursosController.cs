@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication156456.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = Roles.Estudiante)]
     public class CursosController : Controller
     {
         private CursosHandler _cursosHandler;
