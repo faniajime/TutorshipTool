@@ -13,88 +13,118 @@
 </style>
 
 <html lang="es">
-    <head>
-        <title>Agregar Nueva Tutoría</title>
-    </head>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.all.min.js"></script>
+    <title>Agregar Nueva Tutoría</title>
+</head>
 
-    <body>
-        <div class="container-fluid overflow-hidden tab-content" style="text-align:left;">
+<body>
+    <div class="container-fluid overflow-hidden tab-content" style="text-align:left;">
 
-            <div id="id_addTutorship">
-                <div>
-                    <br />
-                    <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
-                    <br />
-                    <h3 class="customHeader">Agregar Nueva Tutoría</h3>
-                </div>
-            </div>
-
-            <div id="id_addTutorship_inputFields" class="list-group">
-                <form action="/MenuTutor/AddThisTutorship" method="post">
-                    <div class="list-group-item row">
-                        <div class="col-md-4">
-                            <h4>Seleccionar Curso</h4>
-                            <select id="id_addTutorship_inputFields_dropdownMenu" name="tutorshipCourse" size="11">
-                                @for (int index = 0; index < ViewBag.coursesList.Count; index++) {
-                                    if (index == 0) {
-                                        <option value="@ViewBag.coursesList[index].id" selected>
-                                            @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
-                                        </option>
-                                    } else {
-                                        <option value="@ViewBag.coursesList[index].id">
-                                            @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
-                                        </option>
-                                    }
-                                }
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <h4>Modalidad De La Tutoría</h4>
-                            <select id="id_selectCourse_inputFields_dropdownMenu" name="tutorshipModality">
-                                <option value="Virtual" selected>
-                                    Virtual
-                                </option>
-                                <option value="Presencial">
-                                    Presencial
-                                </option>
-                                <option value="Cualquiera">
-                                    Cualquiera
-                                </option>
-                            </select>
-                            <br />
-                            <br />
-
-                            <h4>Cantidad Máxima de Estudiantes</h4>
-                            <input name="inputMaxStudents" type="number" min="1" max="30" value="1" required />
-
-                            <br />
-                            <br />
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Tarifa Individual</h4>
-                                    <input name="inputIndividualFare" type="number" min="0" max="100000" value="0" required />
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h4>Tarifa Grupal</h4>
-                                    <input name="inputGroupFare" type="number" min="0" max="100000" value="0" required />
-                                </div>
-                            </div>
-
-                            <br />
-
-                        </div>
-                    </div>
-
-                    <br />
-
-                    <div class="row">
-                        <input id="id_addTutorship_submitInput" class="btn btn-primary btn-lg" name="tutorshipSubmit" type="submit" value="Agregar Esta Tutoría &raquo" onclick="return confirm('Está seguro que quiere agregar esta tutoría?')"/>
-                    </div>
-                </form>
+        <div id="id_addTutorship">
+            <div>
+                <br />
+                <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+                <br />
+                <h3 class="customHeader">Agregar Nueva Tutoría</h3>
             </div>
         </div>
-    </body>
+
+        <div id="id_addTutorship_inputFields" class="list-group">
+            <form id="form" action="/MenuTutor/AddThisTutorship" method="post">
+                <div class="list-group-item row">
+                    <div class="col-md-4">
+                        <h4>Seleccionar Curso</h4>
+                        <select id="id_addTutorship_inputFields_dropdownMenu" name="tutorshipCourse" size="11">
+                            @for (int index = 0; index < ViewBag.coursesList.Count; index++)
+                            {
+                                if (index == 0)
+                                {
+                                    <option value="@ViewBag.coursesList[index].id" selected>
+                                        @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@ViewBag.coursesList[index].id">
+                                        @ViewBag.coursesList[index].id - @ViewBag.coursesList[index].nombre
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4>Modalidad De La Tutoría</h4>
+                        <select id="id_selectCourse_inputFields_dropdownMenu" name="tutorshipModality">
+                            <option value="Virtual" selected>
+                                Virtual
+                            </option>
+                            <option value="Presencial">
+                                Presencial
+                            </option>
+                            <option value="Cualquiera">
+                                Cualquiera
+                            </option>
+                        </select>
+                        <br />
+                        <br />
+
+                        <h4>Cantidad Máxima de Estudiantes</h4>
+                        <input name="inputMaxStudents" type="number" min="1" max="30" value="1" required />
+
+                        <br />
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Tarifa Individual</h4>
+                                <input name="inputIndividualFare" type="number" min="0" max="100000" value="0" required />
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>Tarifa Grupal</h4>
+                                <input name="inputGroupFare" type="number" min="0" max="100000" value="0" required />
+                            </div>
+                        </div>
+
+                        <br />
+
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <input id="id_addTutorship_submitInput" class="btn btn-primary btn-lg" name="tutorshipSubmit" type="button" value="Agregar Tutoría &raquo" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        document.querySelector("#id_addTutorship_submitInput").addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "¿Está seguro/a que desea crear esta tutoría?",
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                confirmButtonColor: "#1680CB",
+                cancelButtonText: "Cancelar",
+                cancelButtonColor: "#7D8992"
+            }).then(function (result) {
+                if (result.value) {
+                    $('#form').submit();                  
+                    Swal.fire("Agregada!", "La tutoría se ha añadido exitosamente", "success");
+                } else {
+                    Swal.fire("Cancelado!", "La tutoria no se ha creado", "warning");
+                }
+            });
+        });
+    </script>
+</body>
 </html>
