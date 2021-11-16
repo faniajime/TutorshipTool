@@ -8,6 +8,9 @@
     <link rel="icon" href="@Url.Content("~/content/tutoriaicon.ico")" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
+
+
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
@@ -43,5 +46,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/chosen.jquery.js"></script>
+
 </body>
 </html>
