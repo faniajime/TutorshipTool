@@ -53,7 +53,6 @@ namespace WebApplication156456.Handlers
                         obj.calificacion_tutoria = Convert.ToDouble(_dataSet.Tables[0].Rows[i]["calificacion_tutoria"]);
                         obj.tutor_nombre = Convert.ToString(_dataSet.Tables[0].Rows[i]["tutor_nombre"]);
                         obj.tutor_apellidos = Convert.ToString(_dataSet.Tables[0].Rows[i]["tutor_apellidos"]);
-                        obj.disponibilidad = Convert.ToString(_dataSet.Tables[0].Rows[i]["disponibilidad"]).Replace("'", "");
                         obj.nombre = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombre"]);
                         obj.area = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombre_area"]);
                         obj.stars = Convert.ToInt32(Convert.ToInt32(obj.calificacion_tutoria) / 2);

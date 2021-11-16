@@ -140,5 +140,10 @@ namespace WebApplication156456.Controllers
 
             return RedirectToAction("MenuTutor", "MenuTutor");
         }
+
+        public ActionResult setHorario() 
+        {
+            return View();
+        }
     }
 }

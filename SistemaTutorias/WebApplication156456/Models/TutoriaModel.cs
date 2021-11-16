@@ -22,7 +22,6 @@ namespace PruebaAzure.Models
         public string cursoid { get; set; }
         public string tutor_nombre { get; set; }
         public string tutor_apellidos { get; set; }
-        public string disponibilidad { get; set; }
         public string nombre { get; set; }
         public string area { get; set; }
         public int stars { get; set; }

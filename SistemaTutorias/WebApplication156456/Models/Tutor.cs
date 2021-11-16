@@ -12,6 +12,7 @@ namespace WebApplication156456.Models
         public string region_canton { get; set; }
         public string region_distr { get; set; }
         public string region_detalles { get; set; }
+        public List<DiaHorarioModel> horario { get; set; }
 
     }
 }
