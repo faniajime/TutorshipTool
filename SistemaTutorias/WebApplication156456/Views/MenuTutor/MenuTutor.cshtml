@@ -30,18 +30,18 @@
                     <form class="list-group-item" action="/MenuTutor/SubmitRegion" method="post">
                         <div class="row">
                             <div class="col-md-2">
-                                <h4>Provincia</h4>
-                                <input id="id_menuTutor_region_inputFields_inputProvincia" name="inputProvincia" type="text" value="@ViewBag.province" required/>
+                                <label for="id_menuTutor_region_inputFields_inputProvincia">Provincia</label>
+                                <input id="id_menuTutor_region_inputFields_inputProvincia" name="inputProvincia" type="text" value="@ViewBag.province" required />
                             </div>
 
                             <div class="col-md-2">
-                                <h4>Canton</h4>
+                                <label for="id_menuTutor_region_inputFields_inputCanton">Cantón</label>
                                 <input id="id_menuTutor_region_inputFields_inputCanton" name="inputCanton" type="text" value="@ViewBag.city" required />
                             </div>
 
                             <div class="col-md-2">
-                                <h4>Distrito</h4>
-                                <input id="id_menuTutor_region_inputFields_inputDistrito" name="inputDistrito" type="text" value="@ViewBag.district" required/>
+                                <label for="id_menuTutor_region_inputFields_inputDistrito">Distrito</label>
+                                <input id="id_menuTutor_region_inputFields_inputDistrito" name="inputDistrito" type="text" value="@ViewBag.district" required />
                             </div>
 
                         </div>
@@ -50,7 +50,7 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <h4>Detalles De Dirección</h4>
+                                <label for="id_menuTutor_region_inputFields_inputDetalles">Detalles</label>
                                 <textarea id="id_menuTutor_region_inputFields_inputDetalles" name="inputDetalles" style="resize:none" cols="50" rows="5" required>@ViewBag.details</textarea>
                             </div>
                         </div>
