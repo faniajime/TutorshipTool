@@ -1,12 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "Establecer Horario";
+﻿@{
+    ViewBag.Title = "DHTMLX Scheduler .NET";
 }
+
 <head>
+    <title>Horario</title>
     <link href="~/css/Horario.css" rel="stylesheet" />
 </head>
-
-<h2>Appointment Calendar</h2>
+<h2>Horario de disponibilidad</h2>
+<h4>Marque su disponibilidad en el calendario. Añada hora de inicio, finalización y agregue un texto descriptivo, por ejemplo: Disponibilidad martes.</h4>
+<hr/>
 <div class="scheduler_container">
     @Html.Raw(Model.Render())
 </div>
+<br />
+<br />
+<a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Guardar y regresar</a>

@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <h4>Provincia</h4>
-                                <input id="id_menuTutor_region_inputFields_inputProvincia" name="inputProvincia" type="text" value="@ViewBag.province" required/>
+                                <input id="id_menuTutor_region_inputFields_inputProvincia" name="inputProvincia" type="text" value="@ViewBag.province" required />
                             </div>
 
                             <div class="col-md-2">
@@ -41,7 +41,7 @@
 
                             <div class="col-md-2">
                                 <h4>Distrito</h4>
-                                <input id="id_menuTutor_region_inputFields_inputDistrito" name="inputDistrito" type="text" value="@ViewBag.district" required/>
+                                <input id="id_menuTutor_region_inputFields_inputDistrito" name="inputDistrito" type="text" value="@ViewBag.district" required />
                             </div>
 
                         </div>
@@ -70,7 +70,15 @@
             <br />
             <br />
             <br />
-
+            <div id="verhorario">
+                <h3 class="customHeader">Especificar horario</h3>
+                <br />
+                <a href="@Url.Action("Index", "Horario")" class=" btn btn-primary btn-lg">Establecer horario &raquo</a>
+                <br />
+            </div>
+            <br />
+            <br />
+            <br />
             <div id="id_menuTutor_tutorias">
                 <div>
                     <h3 class="customHeader">Ajustes de Tutorías</h3>
@@ -83,20 +91,24 @@
                 <br />
 
                 <div class="list-group">
-                    @if (@ViewBag.tutorshipList.Count == 0) {
+                    @if (@ViewBag.tutorshipList.Count == 0)
+                    {
                         <h4>Usted no tiene tutorías registradas</h4>
-                    } else {
-                        for (int index = 0; index < @ViewBag.tutorshipList.Count; index++) { 
-                        <a href="@Url.Action("SelectCourse", "MenuTutor", new { tutorshipID = ViewBag.tutorshipList[index].tutoria_id })" class="list-group-item">
-                            <h4 class="list-group-item-heading"><b>Curso: @ViewBag.tutorshipList[index].curso_id</b></h4>
-                            <p class="list-group-item-text">Nombre Curso: @ViewBag.tutorshipList[index].nombre_curso</p>
-                            <p class="list-group-item-text">ID Tutoría: @ViewBag.tutorshipList[index].tutoria_id</p>
-                            <p class="list-group-item-text">Modalidad: @ViewBag.tutorshipList[index].tipo_sesion</p>
-                            <p class="list-group-item-text">Máximo De Estudiantes: @ViewBag.tutorshipList[index].cantidad_estudiantes</p>
-                            <p class="list-group-item-text">Tarifa Individual: @ViewBag.tutorshipList[index].tarifa_individual</p>
-                            <p class="list-group-item-text">Tarifa Grupal: @ViewBag.tutorshipList[index].tarifa_grupal</p>
-                            <p class="list-group-item-text">Calificación: @ViewBag.tutorshipList[index].calificacion_tutoria</p>
-                        </a>
+                    }
+                    else
+                    {
+                        for (int index = 0; index < @ViewBag.tutorshipList.Count; index++)
+                        {
+                            <a href="@Url.Action("SelectCourse", "MenuTutor", new { tutorshipID = ViewBag.tutorshipList[index].tutoria_id })" class="list-group-item">
+                                <h4 class="list-group-item-heading"><b>Curso: @ViewBag.tutorshipList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">Nombre Curso: @ViewBag.tutorshipList[index].nombre_curso</p>
+                                <p class="list-group-item-text">ID Tutoría: @ViewBag.tutorshipList[index].tutoria_id</p>
+                                <p class="list-group-item-text">Modalidad: @ViewBag.tutorshipList[index].tipo_sesion</p>
+                                <p class="list-group-item-text">Máximo De Estudiantes: @ViewBag.tutorshipList[index].cantidad_estudiantes</p>
+                                <p class="list-group-item-text">Tarifa Individual: @ViewBag.tutorshipList[index].tarifa_individual</p>
+                                <p class="list-group-item-text">Tarifa Grupal: @ViewBag.tutorshipList[index].tarifa_grupal</p>
+                                <p class="list-group-item-text">Calificación: @ViewBag.tutorshipList[index].calificacion_tutoria</p>
+                            </a>
                         }
                     }
                 </div>
@@ -105,7 +117,7 @@
                 <br />
 
             </div>
-    </div>
+        </div>
     </body>
 </html>
 
