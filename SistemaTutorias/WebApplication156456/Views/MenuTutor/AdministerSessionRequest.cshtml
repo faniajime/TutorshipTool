@@ -17,19 +17,23 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Administrar Sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.all.min.js"></script>
 </head>
+
 <body>
     <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
         <div id="id_administerSessionRequest_details">
             <div>
-                <br />
-                <a href="@Url.Action("ViewSessions", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
-                <br />
+
                 <h3 class="customHeader">Administrar Sesión</h3>
                 <br />
             </div>
 
-            @if (ViewBag.currentSession.estado_sesion == "Finalizada" || ViewBag.currentSession.estado_sesion == "Cancelada") {
+            @if (ViewBag.currentSession.estado_sesion == "Finalizada" || ViewBag.currentSession.estado_sesion == "Cancelada")
+            {
                 <div class="list-group">
                     <div class="list-group-item">
                         <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
@@ -41,13 +45,16 @@
                         <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
                         <br />
 
-                        @if (ViewBag.currentSession.modalidad == "Virtual") {
+                        @if (ViewBag.currentSession.modalidad == "Virtual")
+                        {
                             <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
                             <br />
                             <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none; color:deepskyblue" cols="120" rows="1" readonly>@ViewBag.currentSession.enlace</textarea>
                             <br />
                             <br />
-                        } else {
+                        }
+                        else
+                        {
                             <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
                             <br />
                             <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
@@ -55,25 +62,34 @@
                             <br />
                         }
 
-                        @if (ViewBag.currentSession.estado_sesion == "Finalizada") {
+                        @if (ViewBag.currentSession.estado_sesion == "Finalizada")
+                        {
                             <label>Estado: <span style="color:greenyellow">@ViewBag.currentSession.estado_sesion</span></label>
                             <br />
                             <br />
-                        } else {
+                        }
+                        else
+                        {
                             <label>Estado: <span style="color:red">@ViewBag.currentSession.estado_sesion</span></label>
                             <br />
                             <br />
                         }
 
-                        @if (ViewBag.currentSession.evaluacion_sesion == 0) {
+                        @if (ViewBag.currentSession.evaluacion_sesion == 0)
+                        {
                             <label>Calificación: <span style="color:orange">Sin Calificar</span></label>
-                        } else {
+                        }
+                        else
+                        {
                             <label>Calificación: <span style="color:green">ViewBag.currentSession.evaluacion_sesion</span></label>
                         }
                     </div>
                 </div>
-            } else if (ViewBag.currentSession.estado_sesion == "Esperando Respuesta") {
-                if (ViewBag.currentSession.modalidad == "Virtual") {
+            }
+            else if (ViewBag.currentSession.estado_sesion == "Esperando Respuesta")
+            {
+                if (ViewBag.currentSession.modalidad == "Virtual")
+                {
                     <div class="list-group">
                         <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
                             <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
@@ -106,7 +122,9 @@
 
                         </form>
                     </div>
-                } else {
+                }
+                else
+                {
                     <div class="list-group">
                         <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
                             <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
@@ -140,8 +158,11 @@
                         </form>
                     </div>
                 }
-            } else {
-                if (ViewBag.currentSession.modalidad == "Virtual") {
+            }
+            else
+            {
+                if (ViewBag.currentSession.modalidad == "Virtual")
+                {
                     <div class="list-group">
                         <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
                             <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
@@ -175,7 +196,9 @@
 
                         </form>
                     </div>
-                } else {
+                }
+                else
+                {
                     <div class="list-group">
                         <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
                             <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
@@ -211,7 +234,32 @@
                     </div>
                 }
             }
+            <br />
+            <a href="@Url.Action("ViewSessions", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+            <br />
         </div>
     </div>
+    <script type="text/javascript">
+        document.querySelector("#id_administerSessionRequest_fields_submit").addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "¿Está seguro/a que desea guardar ajustes de sesión?",
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                confirmButtonColor: "#1680CB",
+                cancelButtonText: "Cancelar",
+                cancelButtonColor: "#7D8992"
+            }).then(function (result) {
+                if (result.value) {
+                    $("#id_administerSessionRequest_fields").submit();
+                    Swal.fire("Guardado!", "La información de sesión se ha guardado exitosamente", "success");
+                } else {
+                    Swal.fire("Cancelado!", "La información de sesión no se ha guardado", "warning");
+                }
+            });
+        });
+    </script>
 </body>
+
+
 </html>

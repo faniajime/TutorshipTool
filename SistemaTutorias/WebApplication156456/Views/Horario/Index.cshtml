@@ -5,14 +5,42 @@
 <head>
     <title>Horario</title>
     <link href="~/css/Horario.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.10/dist/sweetalert2.all.min.js"></script>
 </head>
-<h2>Horario de disponibilidad</h2>
-<h4>Marque su disponibilidad en el calendario. Añada hora de inicio, finalización y agregue un texto descriptivo, por ejemplo: Disponibilidad martes.</h4>
-<hr />
-<div class="scheduler_container">
-    @Html.Raw(Model.Render())
-</div>
-<br />
-<br />
-<a href="@Url.Action("MenuTutor", "MenuTutor")" id="guardar_horario" class=" btn btn-primary btn-lg">Guardar y regresar</a>
+<body>
+    <h2>Horario de disponibilidad</h2>
+    <h4>Marque su disponibilidad en el calendario. Añada hora de inicio, finalización y agregue un texto descriptivo, por ejemplo: Disponibilidad martes.</h4>
+    <hr />
+    <div class="scheduler_container">
+        @Html.Raw(Model.Render())
+    </div>
+    <br />
+    <br />
+    <a href="@Url.Action("MenuTutor", "MenuTutor")" id="guardar_horario" class=" btn btn-primary btn-lg">Guardar y regresar</a>
 
+    <script type="text/javascript">
+        document.querySelector("#guardar_horario").addEventListener("click", function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "¿Está seguro/a que desea guardar ajustes de horario?",
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                confirmButtonColor: "#1680CB",
+                cancelButtonText: "Cancelar",
+                cancelButtonColor: "#7D8992"
+            }).then(function (result) {
+                if (result.value) {
+
+                    Swal.fire("Guardado!", "La información de sesión se ha guardado exitosamente", "success");
+                    window.location.href = '@Url.Action("MenuTutor", "MenuTutor")';
+                } else {
+                    Swal.fire("Cancelado!", "La información de sesión no se ha guardado", "warning");
+                    window.location.href = '@Url.Action("MenuTutor", "MenuTutor")';
+                }
+            });
+        });
+    </script>
+</body>
