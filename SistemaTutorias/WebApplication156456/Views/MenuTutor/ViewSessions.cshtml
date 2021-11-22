@@ -1,0 +1,78 @@
+﻿@model WebApplication156456.Models.MenuTutorModel
+@{
+    ViewBag.Title = "MenuTutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    .customHeader {
+        text-align: left;
+        font-weight: bold
+    }
+</style>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Ver Sesiones</title>
+</head>
+<body>
+    <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
+        <div id="id_viewSessions_list">
+            <div>
+                <br />
+                <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+                <br />
+                <h3 class="customHeader">Ver Solicitudes De Sesiones</h3>
+                <br />
+                <br />
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="list-group col-md-6">
+                    <h4>Pendientes</h4>
+                    @for (int index = 0; index < ViewBag.sessionList.Count; index++) {
+                        if (ViewBag.sessionList[index].estado_sesion == "Esperando Respuesta") {
+                            <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.sessionList[index].id })" class="list-group-item">
+                                <h4 class="list-group-item-heading"><b>Curso: @ViewBag.sessionList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">Modalidad: @ViewBag.sessionList[index].modalidad</p>
+                                <p class="list-group-item-text">Fecha Inicio: @ViewBag.sessionList[index].fecha_inicio</p>
+                                <p class="list-group-item-text">Fecha Finalización: @ViewBag.sessionList[index].fecha_fin</p>
+                                <p class="list-group-item-text">Estado: <span style="color:orange">@ViewBag.sessionList[index].estado_sesion</span></p>
+                            </a>
+                        }
+                    }
+                </div>
+                <div class="list-group col-md-6">
+                    <h4>Con Respuesta</h4>
+                    @for (int index = 0; index < ViewBag.sessionList.Count; index++) {
+                        if (ViewBag.sessionList[index].estado_sesion != "Esperando Respuesta") {
+                            <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.sessionList[index].id })" class="list-group-item">
+                                <h4 class="list-group-item-heading"><b>Curso: @ViewBag.sessionList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">Modalidad: @ViewBag.sessionList[index].modalidad</p>
+                                <p class="list-group-item-text">Fecha Inicio: @ViewBag.sessionList[index].fecha_inicio</p>
+                                <p class="list-group-item-text">Fecha Finalización: @ViewBag.sessionList[index].fecha_fin</p>
+                                @if (@ViewBag.sessionList[index].estado_sesion == "Finalizada") {
+                                    <p class="list-group-item-text">Estado: <span style="color:lawngreen">@ViewBag.sessionList[index].estado_sesion</span></p>
+                                    if (ViewBag.sessionList[index].evaluacion_sesion == 0) {
+                                        <p class="list-group-item-text">Calificación: <span style="font-weight:bolder">-</span></p>
+                                    } else { 
+                                        <p class="list-group-item-text">Calificación: <span style="font-weight:bolder">@ViewBag.sessionList[index].evaluacion_sesion</span></p>
+                                    }
+
+                                } else if (@ViewBag.sessionList[index].estado_sesion == "Cancelada") {
+                                    <p class="list-group-item-text">Estado: <span style="color:red">@ViewBag.sessionList[index].estado_sesion</span></p>
+                                } else if (@ViewBag.sessionList[index].estado_sesion == "Pendiente") {
+                                    <p class="list-group-item-text">Estado: <span style="color:orange">@ViewBag.sessionList[index].estado_sesion</span></p>
+                                }
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

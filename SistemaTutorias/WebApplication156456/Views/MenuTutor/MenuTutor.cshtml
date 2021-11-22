@@ -10,6 +10,12 @@
         text-align: left;
         font-weight: bold
     }
+
+    .alertFont {
+        color: orangered;
+        font-weight:bolder;
+        font-size:22px;
+    }
 </style>
 
 <html lang="es">
@@ -72,6 +78,13 @@
 
             <br />
             <br />
+
+            <div id="id_menuTutor_sesiones">
+                <h3 class="customHeader">Solicitudes De Sesión</h3>
+                <br />
+                <a href="@Url.Action("ViewSessions", "MenuTutor")" class=" btn btn-primary btn-lg" >Ver Solicitudes <span class="alertFont">@ViewBag.pendingSessions</span></a>
+            </div>
+
             <br />
             <br />
 

@@ -1,0 +1,217 @@
+﻿@model WebApplication156456.Models.MenuTutorModel
+@{
+    ViewBag.Title = "MenuTutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<style>
+    .customHeader {
+        text-align: left;
+        font-weight: bold
+    }
+
+</style>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Administrar Sesión</title>
+</head>
+<body>
+    <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
+        <div id="id_administerSessionRequest_details">
+            <div>
+                <br />
+                <a href="@Url.Action("ViewSessions", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+                <br />
+                <h3 class="customHeader">Administrar Sesión</h3>
+                <br />
+            </div>
+
+            @if (ViewBag.currentSession.estado_sesion == "Finalizada" || ViewBag.currentSession.estado_sesion == "Cancelada") {
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                        <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                        <br />
+                        <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                        <br />
+                        <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                        <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                        <br />
+
+                        @if (ViewBag.currentSession.modalidad == "Virtual") {
+                            <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none; color:deepskyblue" cols="120" rows="1" readonly>@ViewBag.currentSession.enlace</textarea>
+                            <br />
+                            <br />
+                        } else {
+                            <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
+                            <br />
+                            <br />
+                        }
+
+                        @if (ViewBag.currentSession.estado_sesion == "Finalizada") {
+                            <label>Estado: <span style="color:greenyellow">@ViewBag.currentSession.estado_sesion</span></label>
+                            <br />
+                            <br />
+                        } else {
+                            <label>Estado: <span style="color:red">@ViewBag.currentSession.estado_sesion</span></label>
+                            <br />
+                            <br />
+                        }
+
+                        @if (ViewBag.currentSession.evaluacion_sesion == 0) {
+                            <label>Calificación: <span style="color:orange">Sin Calificar</span></label>
+                        } else {
+                            <label>Calificación: <span style="color:green">ViewBag.currentSession.evaluacion_sesion</span></label>
+                        }
+                    </div>
+                </div>
+            } else if (ViewBag.currentSession.estado_sesion == "Esperando Respuesta") {
+                if (ViewBag.currentSession.modalidad == "Virtual") {
+                    <div class="list-group">
+                        <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
+                            <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                            <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                            <br />
+                            <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                            <br />
+                            <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                            <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none;color:deepskyblue" cols="120" rows="1" required>@ViewBag.currentSession.enlace</textarea>
+                            <br />
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionResponse">Respuesta A Solicitud</label>
+                            <br />
+                            <select id="id_administerSessionRequest_fields_sessionResponse" name="sessionResponse">
+                                <option value="Pendiente">Aceptar Solicitud</option>
+                                <option value="Cancelada">Cancelar Solicitud</option>
+                            </select>
+                            <br />
+                            <br />
+                            <input type="text" id="id_administerSessionRequest_fields_operation" name="responseOperation" value="VirtualNew" hidden />
+                            <input type="number" id="id_administerSessionRequest_fields_sessionID" name="currentSessionID" value="@ViewBag.currentSession.id" hidden />
+
+                            <input id="id_administerSessionRequest_fields_submit" name="sessionRequestSubmit" class="btn btn-primary btn-lg" type="submit" value="Aceptar Respuesta &raquo" />
+
+                        </form>
+                    </div>
+                } else {
+                    <div class="list-group">
+                        <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
+                            <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                            <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                            <br />
+                            <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                            <br />
+                            <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                            <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
+                            <br />
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionResponse">Respuesta A Solicitud</label>
+                            <br />
+                            <select id="id_administerSessionRequest_fields_sessionResponse" name="sessionResponse">
+                                <option value="Pendiente">Aceptar Solicitud</option>
+                                <option value="Cancelada">Cancelar Solicitud</option>
+                            </select>
+                            <br />
+                            <br />
+                            <input type="text" id="id_administerSessionRequest_fields_operation" name="responseOperation" value="NonVirtualNew" hidden />
+                            <input type="number" id="id_administerSessionRequest_fields_sessionID" name="currentSessionID" value="@ViewBag.currentSession.id" hidden />
+
+                            <input id="id_administerSessionRequest_fields_submit" name="sessionRequestSubmit" class="btn btn-primary btn-lg" type="submit" value="Aceptar Respuesta &raquo" />
+
+                        </form>
+                    </div>
+                }
+            } else {
+                if (ViewBag.currentSession.modalidad == "Virtual") {
+                    <div class="list-group">
+                        <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
+                            <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                            <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                            <br />
+                            <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                            <br />
+                            <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                            <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none; color:deepskyblue" cols="120" rows="1" required>@ViewBag.currentSession.enlace</textarea>
+                            <br />
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionResponse">Respuesta A Solicitud</label>
+                            <br />
+                            <select id="id_administerSessionRequest_fields_sessionResponse" name="sessionResponse">
+                                <option value="Pendiente" selected>Pendiente (Actual)</option>
+                                <option value="Finalizada">Dar Por Finalizada</option>
+                                <option value="Cancelada">Cancelar Solicitud</option>
+                            </select>
+                            <br />
+                            <br />
+                            <input type="text" id="id_administerSessionRequest_fields_operation" name="responseOperation" value="VirtualPending" hidden />
+                            <input type="number" id="id_administerSessionRequest_fields_sessionID" name="currentSessionID" value="@ViewBag.currentSession.id" hidden />
+
+                            <input id="id_administerSessionRequest_fields_submit" name="sessionRequestSubmit" class="btn btn-primary btn-lg" type="submit" value="Aceptar Respuesta &raquo" />
+
+                        </form>
+                    </div>
+                } else {
+                    <div class="list-group">
+                        <form id="id_administerSessionRequest_fields" action="/MenuTutor/SubmitSessionResponse" class="list-group-item" method="post">
+                            <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                            <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                            <br />
+                            <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                            <br />
+                            <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                            <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
+                            <br />
+                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
+                            <br />
+                            <br />
+
+                            <label for="id_administerSessionRequest_fields_sessionResponse">Respuesta A Solicitud</label>
+                            <br />
+                            <select id="id_administerSessionRequest_fields_sessionResponse" name="sessionResponse">
+                                <option value="Pendiente" selected>Pendiente (Actual)</option>
+                                <option value="Finalizada">Dar Por Finalizada</option>
+                                <option value="Cancelada">Cancelar Solicitud</option>
+                            </select>
+                            <br />
+                            <br />
+                            <input type="text" id="id_administerSessionRequest_fields_operation" name="responseOperation" value="NonVirtualPending" hidden />
+                            <input type="number" id="id_administerSessionRequest_fields_sessionID" name="currentSessionID" value="@ViewBag.currentSession.id" hidden />
+
+                            <input id="id_administerSessionRequest_fields_submit" name="sessionRequestSubmit" class="btn btn-primary btn-lg" type="submit" value="Aceptar Respuesta &raquo" />
+
+                        </form>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>
