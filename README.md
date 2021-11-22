@@ -29,6 +29,8 @@ Los roles del equipo SCRUM son:
 
 Evidencia de pruebas manuales, diagrama de bases, resultados de investigaciones y otros documentos del sprint: https://drive.google.com/drive/folders/1JnQNyUnuxI8tAUCADEzs9wnqI4FC8-5E?usp=sharing
 
+Evidencia de pruebas II Sprint: https://docs.google.com/spreadsheets/d/1dDsQo8qGSbkG2Ps8guW-Ms1_6rslkzaKFphUY-AlAf8/edit?usp=sharing
+
 #### Calendario
 
 El calendario de trabajo se encuentra en la siguiente dirección web: https://calendar.google.com/calendar/u/0?cid=a2I4aHVsZTVtdGhkYnQ1Y3V2M2pkbGlzZmdAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ
