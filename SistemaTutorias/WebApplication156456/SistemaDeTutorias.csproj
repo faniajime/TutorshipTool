@@ -340,6 +340,7 @@
     <Compile Include="Models\MenuTutorModel.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\Tutor.cs" />
     <Compile Include="Models\TutoriaModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -749,10 +750,13 @@
     <Content Include="Views\MenuTutor\MenuTutor.cshtml" />
     <Content Include="Views\MenuTutor\SelectCourse.cshtml" />
     <Content Include="Views\Horario\Index.cshtml" />
+    <Content Include="Views\MenuTutor\ViewSessions.cshtml" />
+    <Content Include="Views\MenuTutor\AdministerSessionRequest.cshtml" />
     <Content Include="Views\DisponibilidadSesion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SesionModel\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>
   <ItemGroup>

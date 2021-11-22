@@ -36,12 +36,12 @@ namespace WebApplication156456.Handlers
             return coursesList;
         }
 
-        public List<Tutoria> obtainTutorTutorships(string tutorID) {
+        public List<Tutoria> obtainTutorTutorships(string personID) {
             List<Tutoria> tutorshipList = new List<Tutoria>();
             string sqlQuery = 
                 "select * from tutoria " +
                 "inner join tutor on tutoria.tutorID = tutor.id " +
-                "where tutor.personID= " + "\'" + tutorID + "\'";
+                "where tutor.personID= " + "\'" + personID + "\'";
             DataTable resultingTable = obtainDataTableFromQuery(sqlQuery);
 
             foreach (DataRow row in resultingTable.Rows) {
@@ -59,6 +59,46 @@ namespace WebApplication156456.Handlers
                 );
             }
             return tutorshipList;
+        }
+
+        public List<Sesion> obtainTutorSessions(string personID) {
+            List<Sesion> sessionList = new List<Sesion>();
+
+            try {
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                SqlDataAdapter dataTableAdapter = new SqlDataAdapter(sqlQueryCommand);
+
+                sqlConnection.Open();
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "RetrieveByPersonID";
+                sqlQueryCommand.Parameters.Add("@person_ID", SqlDbType.NVarChar).Value = personID;
+
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        sessionList.Add(
+                            new Sesion {
+                                id = Convert.ToInt32(reader["id"]),
+                                estudiante_id = Convert.ToInt32(reader["estudiante_id"]),
+                                tutor_id = Convert.ToInt32(reader["tutor_id"]),
+                                curso_id = Convert.ToString(reader["curso_id"]),
+                                modalidad = Convert.ToString(reader["modalidad"]),
+                                evaluacion_sesion = Convert.ToInt32(reader["evaluacion_sesion"]),
+                                direccion = Convert.ToString(reader["direccion"]),
+                                enlace = Convert.ToString(reader["enlace"]),
+                                estado_sesion = Convert.ToString(reader["estado_sesion"]),
+                                fecha_inicio = Convert.ToString(reader["start_date"]),
+                                fecha_fin = Convert.ToString(reader["end_date"])
+                            }
+
+                        );
+                    }
+                }
+
+            } catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+
+            return sessionList;
         }
 
         private DataTable obtainDataTableFromQuery(string sqlQuery) {
@@ -195,6 +235,40 @@ namespace WebApplication156456.Handlers
                 sqlQueryCommand.Parameters.Add("@tarifa_individual", SqlDbType.Int).Value = inputIndividualFare;
                 sqlQueryCommand.Parameters.Add("@tarifa_grupal", SqlDbType.Int).Value = inputGroupFare;
                 sqlQueryCommand.Parameters.Add("@calificacion_tutoria", SqlDbType.Float).Value = 0;
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+        }
+
+        public void modifyVirtualSession(string sessionAdress, string sessionResponse, int currentSessionID) {
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "UpdateVirtual";
+                sqlQueryCommand.Parameters.Add("@link", SqlDbType.VarChar).Value = sessionAdress;
+                sqlQueryCommand.Parameters.Add("@state", SqlDbType.VarChar).Value = sessionResponse;
+                sqlQueryCommand.Parameters.Add("@session_ID", SqlDbType.Int).Value = currentSessionID;
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+        }
+
+        public void modifyNonVirtualSession(string sessionAdress, string sessionResponse, int currentSessionID) {
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "UpdateNonVirtual";
+                sqlQueryCommand.Parameters.Add("@direction", SqlDbType.VarChar).Value = sessionAdress;
+                sqlQueryCommand.Parameters.Add("@state", SqlDbType.VarChar).Value = sessionResponse;
+                sqlQueryCommand.Parameters.Add("@session_ID", SqlDbType.Int).Value = currentSessionID;
                 sqlQueryCommand.ExecuteNonQuery();
                 sqlConnection.Close();
             }

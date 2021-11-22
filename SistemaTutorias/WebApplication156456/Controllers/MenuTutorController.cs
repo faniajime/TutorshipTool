@@ -20,6 +20,9 @@ namespace WebApplication156456.Controllers
         private MenuTutorHandler databaseHandler { get; }
         private List<Tutoria> tutorshipList { set; get; }
         private List<Cursos> coursesList { set; get; }
+        private List<Sesion> sessionList { set; get; }
+        private int pendingSessions { set; get; }
+        private Sesion currentSession { set; get; }
 
 
         public MenuTutorController() {
@@ -29,6 +32,10 @@ namespace WebApplication156456.Controllers
 
         private List<Tutoria> obtainTutorships() {
             return databaseHandler.obtainTutorTutorships(User.Identity.GetUserId());
+        }
+
+        private List<Sesion> obtainSessions() {
+            return databaseHandler.obtainTutorSessions(User.Identity.GetUserId());
         }
 
         private List<Cursos> obtainCourses() {
@@ -41,8 +48,16 @@ namespace WebApplication156456.Controllers
             ViewBag.district = tutorMenuInstance.regionDistrict;
             ViewBag.details = tutorMenuInstance.regionDetails;
 
+
             tutorshipList = obtainTutorships();
             coursesList = obtainCourses();
+            sessionList = obtainSessions();
+            pendingSessions = 0;
+            foreach (Sesion sesion in sessionList) {
+                if (sesion.estado_sesion == ("Esperando Respuesta")) {
+                    pendingSessions++;
+                }
+            }
 
             foreach (Tutoria tutorship in tutorshipList) {
                 tutorship.nombre_curso = obtainCourseName(tutorship.curso_id);
@@ -50,6 +65,8 @@ namespace WebApplication156456.Controllers
 
             ViewBag.tutorshipList = tutorshipList;
             ViewBag.coursesList = coursesList;
+            ViewBag.sessionList = sessionList;
+            ViewBag.pendingSessions = pendingSessions;
         }
 
         public ActionResult MenuTutor() {
@@ -144,6 +161,49 @@ namespace WebApplication156456.Controllers
         public ActionResult setHorario() 
         {
             return View();
+        }
+
+        public ActionResult ViewSessions() {
+            updateViewBag();
+            return View("ViewSessions");
+        }
+
+        public ActionResult AdministerSessionRequest(int sessionID) {
+            updateViewBag();
+
+            if (sessionList.Exists(x => x.id == sessionID)) {
+                currentSession = sessionList.Find(x => x.id == sessionID);
+                ViewBag.currentSession = currentSession;
+                ViewBag.currentSessionCourse = obtainCourseName(currentSession.curso_id);
+                return View("AdministerSessionRequest");
+            } else {
+                return new HttpNotFoundResult();
+            }
+        }
+
+        public ActionResult SubmitSessionResponse(
+                string sessionAdress,
+                string sessionResponse,
+                string responseOperation,
+                int currentSessionID) {
+
+            switch (responseOperation) {
+                case "VirtualNew":
+                    databaseHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    break;
+                case "VirtualPending":
+                    databaseHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    break;
+                case "NonVirtualNew":
+                    databaseHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    break;
+                case "NonVirtualPending":
+                    databaseHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    break;
+                default:
+                    break;
+            }
+            return RedirectToAction("ViewSessions", "MenuTutor");
         }
     }
 }
