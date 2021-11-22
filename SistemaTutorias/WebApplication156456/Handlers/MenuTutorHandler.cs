@@ -276,5 +276,24 @@ namespace WebApplication156456.Handlers
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
             }
         }
+
+        public Tutor geTutor(string id)
+        {
+            Tutor tutor = new Tutor();
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("get_tutor", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "addTutorshipFromUI";
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException)
+            {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+            return tutor;
+        }
     }
 }

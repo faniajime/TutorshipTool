@@ -10,7 +10,6 @@ namespace PruebaAzure.Models
         public int tutoria_id {get; set; }
         public int tutor_id { get; set; }
         public string curso_id { get; set; }
-
         public string nombre_curso { get; set; }
         public string tipo_sesion { get; set; }
         public int cantidad_estudiantes { get; set; }
@@ -25,6 +24,8 @@ namespace PruebaAzure.Models
         public string nombre { get; set; }
         public string area { get; set; }
         public int stars { get; set; }
+
+        public string tutor_pid { get; set; }
 
     }
 }
