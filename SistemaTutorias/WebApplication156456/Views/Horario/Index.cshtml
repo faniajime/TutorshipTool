@@ -8,10 +8,11 @@
 </head>
 <h2>Horario de disponibilidad</h2>
 <h4>Marque su disponibilidad en el calendario. Añada hora de inicio, finalización y agregue un texto descriptivo, por ejemplo: Disponibilidad martes.</h4>
-<hr/>
+<hr />
 <div class="scheduler_container">
     @Html.Raw(Model.Render())
 </div>
 <br />
 <br />
-<a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Guardar y regresar</a>
+<a href="@Url.Action("MenuTutor", "MenuTutor")" id="guardar_horario" class=" btn btn-primary btn-lg">Guardar y regresar</a>
+

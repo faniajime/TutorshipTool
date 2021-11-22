@@ -23,13 +23,15 @@ namespace AppointmentCalendar.Controllers
         {
             var scheduler = new DHXScheduler(this);
             scheduler.Skin = DHXScheduler.Skins.Flat;
-
+            scheduler.Extensions.Add(SchedulerExtensions.Extension.Limit);
             scheduler.InitialDate = new DateTime(2021, 11, 20);// the initial data of Scheduler
+            scheduler.Config.collision_limit = 0;
 
             scheduler.Config.first_hour = 7;//the minimum value of the hour scale
             scheduler.Config.last_hour = 21;//the maximum value of the hour scale
             scheduler.Config.time_step = 30;//the scale interval for the time selector in the lightbox
             scheduler.Config.limit_time_select = true;//sets max and min values for the time selector in the lightbox to the values of the last_hour and first_hour options
+            
 
             scheduler.LoadData = true;
             scheduler.EnableDataprocessor = true;

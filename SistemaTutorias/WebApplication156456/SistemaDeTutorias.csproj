@@ -313,8 +313,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Context\SesionHorarioContext.cs" />
+    <Compile Include="Models\SesionHorario.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\DisponibilidadSesionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -333,7 +336,6 @@
     <Compile Include="Context\HorarioContext.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cursos.cs" />
-    <Compile Include="Models\DiaHorarioModel.cs" />
     <Compile Include="Models\Estudiante.cs" />
     <Compile Include="Models\MenuTutorModel.cs" />
     <Compile Include="Models\Persona.cs" />
@@ -705,6 +707,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\scheduler.config.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -746,6 +749,7 @@
     <Content Include="Views\MenuTutor\MenuTutor.cshtml" />
     <Content Include="Views\MenuTutor\SelectCourse.cshtml" />
     <Content Include="Views\Horario\Index.cshtml" />
+    <Content Include="Views\DisponibilidadSesion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
