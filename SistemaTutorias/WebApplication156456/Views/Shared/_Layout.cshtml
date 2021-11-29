@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>TutorMe: Página de inicio</title>
     <link rel="icon" href="@Url.Content("~/content/tutoriaicon.ico")" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -28,7 +28,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Cursos disponibles", "Index", "Cursos")</li>
+
+                    @if (ViewContext.HttpContext.User.IsInRole("Estudiante"))
+                    {
+                        <li>@Html.ActionLink("Cursos disponibles", "Index", "Cursos")</li>
+                        <li>@Html.ActionLink("Mis sesiones", "Perfil", "PerfilEstudiante")</li>
+                    }
+                    @if (ViewContext.HttpContext.User.IsInRole("Tutor"))
+                    {
+                        <li>@Html.ActionLink("Administrar perfil", "MenuTutor", "MenuTutor")</li>
+                    }
+
 
                 </ul>
                 @Html.Partial("_LoginPartial")
