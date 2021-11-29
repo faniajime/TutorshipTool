@@ -314,6 +314,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\SesionHorarioContext.cs" />
+    <Compile Include="Controllers\PerfilEstudianteController.cs" />
+    <Compile Include="Handlers\PerfilEstudianteHandler.cs" />
+    <Compile Include="Models\PerfilEstudiante.cs" />
     <Compile Include="Models\SesionHorario.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
@@ -753,11 +756,12 @@
     <Content Include="Views\MenuTutor\ViewSessions.cshtml" />
     <Content Include="Views\MenuTutor\AdministerSessionRequest.cshtml" />
     <Content Include="Views\DisponibilidadSesion\Index.cshtml" />
+    <Content Include="Views\PerfilEstudiante\Perfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\SesionModel\" />
     <Folder Include="Views\Calendar\" />
+    <Folder Include="Views\SesionModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
