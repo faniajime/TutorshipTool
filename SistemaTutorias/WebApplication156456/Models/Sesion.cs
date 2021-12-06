@@ -10,7 +10,8 @@ namespace WebApplication156456.Models
     public class Sesion {
         public int id { set; get; }
         public int estudiante_id { set; get; }
-        public int tutor_id { set; get; }        
+        public int tutor_id { set; get; }  
+        public int tutoria_id { set; get; }
         public string curso_id { set; get; }
         [Display(Name = "Modalidad")]
         public string modalidad { set; get; }
@@ -37,6 +38,8 @@ namespace WebApplication156456.Models
         public int tarifa_individual { set; get; }
         [Display(Name = "Tarifa grupal")]
         public int tarifa_grupal { set; get; }
+        public string texto { set; get; }
+        public string privacidad { set; get; }
         
     }
 }
