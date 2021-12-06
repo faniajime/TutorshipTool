@@ -80,6 +80,7 @@ namespace WebApplication156456.Handlers
                                 id = Convert.ToInt32(reader["id"]),
                                 estudiante_id = Convert.ToInt32(reader["estudiante_id"]),
                                 tutor_id = Convert.ToInt32(reader["tutor_id"]),
+                                tutoria_id = Convert.ToInt32(reader["id_tutoria"]),
                                 curso_id = Convert.ToString(reader["curso_id"]),
                                 modalidad = Convert.ToString(reader["modalidad"]),
                                 evaluacion_sesion = Convert.ToInt32(reader["evaluacion_sesion"]),
@@ -87,12 +88,14 @@ namespace WebApplication156456.Handlers
                                 enlace = Convert.ToString(reader["enlace"]),
                                 estado_sesion = Convert.ToString(reader["estado_sesion"]),
                                 fecha_inicio = Convert.ToString(reader["start_date"]),
-                                fecha_fin = Convert.ToString(reader["end_date"])
+                                fecha_fin = Convert.ToString(reader["end_date"]),
+                                texto = Convert.ToString(reader["text"]),
+                                privacidad = Convert.ToString(reader["privacidad"]),
                             }
-
                         );
                     }
                 }
+                sqlConnection.Close();
 
             } catch (SqlException sqlException) {
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
@@ -277,22 +280,68 @@ namespace WebApplication156456.Handlers
             }
         }
 
-        public Tutor geTutor(string id)
-        {
-            Tutor tutor = new Tutor();
-            try
-            {
+        public Sesion obtainSpecificSession(int sessionID) {
+            Sesion sesion = new Sesion();
+
+            try {
                 sqlConnection.Open();
-                SqlCommand sqlQueryCommand = new SqlCommand("get_tutor", sqlConnection);
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
                 sqlQueryCommand.CommandType = CommandType.StoredProcedure;
-                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "addTutorshipFromUI";
-                sqlQueryCommand.ExecuteNonQuery();
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "RetrieveBySessionID";
+                sqlQueryCommand.Parameters.Add("@session_ID", SqlDbType.Int).Value = sessionID;
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        sesion.id = Convert.ToInt32(reader["id"]);
+                        sesion.estudiante_id = Convert.ToInt32(reader["estudiante_id"]);
+                        sesion.tutor_id = Convert.ToInt32(reader["tutor_id"]);
+                        sesion.tutoria_id = Convert.ToInt32(reader["id_tutoria"]);
+                        sesion.curso_id = Convert.ToString(reader["curso_id"]);
+                        sesion.modalidad = Convert.ToString(reader["modalidad"]);
+                        sesion.evaluacion_sesion = Convert.ToInt32(reader["evaluacion_sesion"]);
+                        sesion.direccion = Convert.ToString(reader["direccion"]);
+                        sesion.enlace = Convert.ToString(reader["enlace"]);
+                        sesion.estado_sesion = Convert.ToString(reader["estado_sesion"]);
+                        sesion.fecha_inicio = Convert.ToString(reader["start_date"]);
+                        sesion.fecha_fin = Convert.ToString(reader["end_date"]);
+                        sesion.texto = Convert.ToString(reader["text"]);
+                        sesion.privacidad = Convert.ToString(reader["privacidad"]);
+                    }
+                }
                 sqlConnection.Close();
             }
-            catch (SqlException sqlException)
-            {
+            catch (SqlException sqlException) {
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
             }
+
+            return sesion;
+        }
+
+        public Tutor getTutorInformation(int tutorID) {
+            Tutor tutor = new Tutor();
+
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Tutor_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "getTutorDetails";
+                sqlQueryCommand.Parameters.Add("@id", SqlDbType.Int).Value = tutorID;
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        tutor.nombre = Convert.ToString(reader["nombre"]);
+                        tutor.apellido = Convert.ToString(reader["apellido"]);
+                        tutor.email = Convert.ToString(reader["email"]);
+                        tutor.region_provinc = Convert.ToString(reader["region_provinc"]);
+                        tutor.region_canton = Convert.ToString(reader["region_canton"]);
+                        tutor.region_distr = Convert.ToString(reader["region_distr"]);
+                        tutor.region_detalles = Convert.ToString(reader["region_detalles"]);
+                    }
+                }
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+
             return tutor;
         }
     }

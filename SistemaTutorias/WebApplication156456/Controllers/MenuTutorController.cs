@@ -17,7 +17,8 @@ namespace WebApplication156456.Controllers
     [Authorize(Roles = Roles.Tutor)]
     public class MenuTutorController : Controller {
         public MenuTutorModel tutorMenuInstance { get; }
-        private MenuTutorHandler databaseHandler { get; }
+        private MenuTutorHandler menuTutorHandler { get; }
+        private NotificacionHandler notificationHandler { get; }
         private List<Tutoria> tutorshipList { set; get; }
         private List<Cursos> coursesList { set; get; }
         private List<Sesion> sessionList { set; get; }
@@ -25,21 +26,24 @@ namespace WebApplication156456.Controllers
         private Sesion currentSession { set; get; }
 
 
+
+
         public MenuTutorController() {
             tutorMenuInstance = new MenuTutorModel();
-            databaseHandler = new MenuTutorHandler();
+            menuTutorHandler = new MenuTutorHandler();
+            notificationHandler = new NotificacionHandler();
         }
 
         private List<Tutoria> obtainTutorships() {
-            return databaseHandler.obtainTutorTutorships(User.Identity.GetUserId());
+            return menuTutorHandler.obtainTutorTutorships(User.Identity.GetUserId());
         }
 
         private List<Sesion> obtainSessions() {
-            return databaseHandler.obtainTutorSessions(User.Identity.GetUserId());
+            return menuTutorHandler.obtainTutorSessions(User.Identity.GetUserId());
         }
 
         private List<Cursos> obtainCourses() {
-            return databaseHandler.obtainAllCourses();
+            return menuTutorHandler.obtainAllCourses();
         }
 
         private void updateViewBag() {
@@ -70,7 +74,7 @@ namespace WebApplication156456.Controllers
         }
 
         public ActionResult MenuTutor() {
-            databaseHandler.getTutorRegionInfo(
+            menuTutorHandler.getTutorRegionInfo(
                 User.Identity.GetUserId(),
                 tutorMenuInstance
             );
@@ -86,7 +90,7 @@ namespace WebApplication156456.Controllers
                 string inputDistrito,
                 string inputDetalles) {
 
-            databaseHandler.setTutorRegionInfo(
+            menuTutorHandler.setTutorRegionInfo(
                 inputProvincia,
                 inputCanton,
                 inputDistrito,
@@ -105,7 +109,7 @@ namespace WebApplication156456.Controllers
                 int inputGroupFare) {
 
 
-            databaseHandler.setTutorshipInfo(
+            menuTutorHandler.setTutorshipInfo(
                 inputTutorshipID,
                 tutorshipModality,
                 inputMaxStudents,
@@ -118,7 +122,7 @@ namespace WebApplication156456.Controllers
         }
 
         public ActionResult DeleteTutorship(int tutorshipID) {
-            databaseHandler.deleteTutorship(tutorshipID);
+            menuTutorHandler.deleteTutorship(tutorshipID);
             return RedirectToAction("MenuTutor", "MenuTutor");
         }
 
@@ -146,7 +150,7 @@ namespace WebApplication156456.Controllers
                 int inputIndividualFare,
                 int inputGroupFare) {
 
-            databaseHandler.addTutorship(
+            menuTutorHandler.addTutorship(
                 User.Identity.GetUserId(),
                 tutorshipCourse,
                 tutorshipModality,
@@ -185,24 +189,82 @@ namespace WebApplication156456.Controllers
                 string sessionAdress,
                 string sessionResponse,
                 string responseOperation,
-                int currentSessionID) {
+                int currentSessionID, 
+                string cancelReason) {
+
+            updateViewBag();
+            string message = "";
+            currentSession = menuTutorHandler.obtainSpecificSession(currentSessionID);
+            string courseName = obtainCourseName(currentSession.curso_id);
+            Tutor tutorInfo = menuTutorHandler.getTutorInformation(currentSession.tutor_id);
 
             switch (responseOperation) {
                 case "VirtualNew":
-                    databaseHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    menuTutorHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+
+                    if (sessionResponse == "Pendiente") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha aceptado su solicitud de sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Fecha de sesión: {currentSession.fecha_inicio} - {currentSession.fecha_fin}\n" +
+                            $"Modalidad: {currentSession.modalidad}\n" +
+                            $"Cantidad de estudiantes: {currentSession.cantidad_estudiantes}\n" +
+                            $"Enlace sesión: {currentSession.enlace}\n" +
+                            $"Tarifas: \n -Individual {currentSession.tarifa_individual} \n -Grupal {currentSession.tarifa_grupal}\n";
+                    } else {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha cancelado su solicitud de sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Motivo: {cancelReason}\n";
+
+                    }
+
                     break;
                 case "VirtualPending":
-                    databaseHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    menuTutorHandler.modifyVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+
+                    if (sessionResponse == "Finalizada") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha dado por finalizada la sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Fecha de sesión: {currentSession.fecha_inicio} - {currentSession.fecha_fin}\n\n" +
+                            $"Recuerde brindar su calificación para esta sesión.\n"; 
+                    } else if (sessionResponse == "Cancelada") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha cancelado su sesión (ID: {currentSession.id}) agendada para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Motivo: {cancelReason}\n";
+                    }
+
                     break;
                 case "NonVirtualNew":
-                    databaseHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    menuTutorHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+
+                    if (sessionResponse == "Pendiente") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha aceptado su solicitud de sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Fecha de sesión: {currentSession.fecha_inicio} - {currentSession.fecha_fin}\n" +
+                            $"Modalidad: {currentSession.modalidad}\n" +
+                            $"Cantidad de estudiantes: {currentSession.cantidad_estudiantes}\n" +
+                            $"Dirección sesión: {currentSession.enlace}\n" +
+                            $"Tarifas: \n -Individual {currentSession.tarifa_individual} \n -Grupal {currentSession.tarifa_grupal}\n";
+                    } else {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha cancelado su solicitud de sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Motivo: {cancelReason}\n";
+
+                    }
+
                     break;
                 case "NonVirtualPending":
-                    databaseHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+                    menuTutorHandler.modifyNonVirtualSession(sessionAdress, sessionResponse, currentSessionID);
+
+                    if (sessionResponse == "Finalizada") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha dado por finalizada la sesión (ID: {currentSession.id}) para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Fecha de sesión: {currentSession.fecha_inicio} - {currentSession.fecha_fin}\n\n" +
+                            $"Recuerde brindar su calificación para esta sesión.\n";
+                    } else if (sessionResponse == "Cancelada") {
+                        message = $"El tutor {tutorInfo.nombre} {tutorInfo.apellido} ha cancelado su sesión (ID: {currentSession.id}) agendada para el curso {currentSession.curso_id}: {courseName}.\n" +
+                            $"Motivo: {cancelReason}\n";
+                    }
+
                     break;
+
                 default:
                     break;
             }
+            notificationHandler.createNewNotification_Student(currentSession.estudiante_id, message);
+
             return RedirectToAction("ViewSessions", "MenuTutor");
         }
     }
