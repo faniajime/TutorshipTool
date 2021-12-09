@@ -19,6 +19,10 @@
     <title>Notification Panel</title>
 </head>
 <body>
+    <br />
+    <br />
+    <br />
+    <br />
     <div>
         <h3>Notificaciones</h3>
         <a href="@Url.Action("DeleteAllNotifications", "Notificacion")" style="background-color:crimson" class=" btn btn-primary btn-lg">Borrar Todas</a>
@@ -27,13 +31,14 @@
     <br />
 
     <div>
-        @for (int index = 0; index < ViewBag.notifications.Count; index++) { 
-        <div class="list-group-item">
-            <p>Fecha: <span style="color:dodgerblue">@ViewBag.notifications[index].fechaNotificacion</span></p>
-            <pre style="font-size:14px">Mensaje: @ViewBag.notifications[index].mensajeNotificacion</pre>
-            <a href="@Url.Action("DeleteNotification", "Notificacion", new {notID = ViewBag.notifications[index].idNotificacion})" style="background-color:crimson" class=" btn btn-primary btn-sm">Borrar</a>
-        </div>
-        <br />
+        @for (int index = 0; index < ViewBag.notifications.Count; index++)
+        {
+            <div class="list-group-item">
+                <p>Fecha: <span style="color:dodgerblue">@ViewBag.notifications[index].fechaNotificacion</span></p>
+                <pre style="font-size:14px">Mensaje: @ViewBag.notifications[index].mensajeNotificacion</pre>
+                <a href="@Url.Action("DeleteNotification", "Notificacion", new {notID = ViewBag.notifications[index].idNotificacion})" style="background-color:crimson" class=" btn btn-primary btn-sm">Borrar</a>
+            </div>
+            <br />
         }
     </div>
 </body>
