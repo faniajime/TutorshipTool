@@ -101,12 +101,19 @@ namespace WebApplication156456.Handlers
                                 fecha_inicio = Convert.ToString(reader["start_date"]),
                                 fecha_fin = Convert.ToString(reader["end_date"]),
                                 texto = Convert.ToString(reader["text"]),
+                                tarifa_individual = Convert.ToInt32(reader["tarifa_individual"]),
+                                tarifa_grupal = Convert.ToInt32(reader["tarifa_grupal"]),
                                 privacidad = Convert.ToString(reader["privacidad"]),
                             }
                         );
                     }
                 }
                 sqlConnection.Close();
+
+                foreach (Sesion sesion in sessionList) {
+                    sesion.lista_asistentes.Clear();
+                    sesion.lista_asistentes = getSessionAssistants(sesion.id, personID);
+                }
 
             } catch (SqlException sqlException) {
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
@@ -291,7 +298,7 @@ namespace WebApplication156456.Handlers
             }
         }
 
-        public Sesion obtainSpecificSession(int sessionID) {
+        public Sesion obtainSpecificSession(int sessionID, string personID) {
             Sesion sesion = new Sesion();
 
             try {
@@ -315,10 +322,13 @@ namespace WebApplication156456.Handlers
                         sesion.fecha_inicio = Convert.ToString(reader["start_date"]);
                         sesion.fecha_fin = Convert.ToString(reader["end_date"]);
                         sesion.texto = Convert.ToString(reader["text"]);
+                        sesion.tarifa_individual = Convert.ToInt32(reader["tarifa_individual"]);
+                        sesion.tarifa_grupal = Convert.ToInt32(reader["tarifa_grupal"]);
                         sesion.privacidad = Convert.ToString(reader["privacidad"]);
                     }
                 }
                 sqlConnection.Close();
+                sesion.lista_asistentes = getSessionAssistants(sesion.id, personID);
             }
             catch (SqlException sqlException) {
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());

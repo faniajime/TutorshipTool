@@ -94,14 +94,15 @@ namespace WebApplication156456.Handlers
             }
             return -1;
         }
-        public List<Sesion> getOpenSesions(int tutoriaId)
+        public List<Sesion> getOpenSesions(int tutoriaId, string personID)
         {
             List<Sesion> sesionList = new List<Sesion>();
             _dataSet = new DataSet();
 
             try
             {
-                
+
+                MenuTutorHandler handler = new MenuTutorHandler();
                 SqlCommand show = new SqlCommand("get_open_sessions", sqlConnection);
                 SqlDataAdapter dataTableAdapter = new SqlDataAdapter(show);
                 sqlConnection.Open();
@@ -132,8 +133,15 @@ namespace WebApplication156456.Handlers
                             nombre_curso = Convert.ToString(reader["nombre_curso"]),
                             sigla_curso = Convert.ToString(reader["sigla_curso"]),
                             contrasena = Convert.ToString(reader["contrasena"]),
+                            tarifa_individual = Convert.ToInt32(reader["tarifa_individual"]),
+                            tarifa_grupal = Convert.ToInt32(reader["tarifa_grupal"]),
                             cantidad_estudiantes = getEstudiantesInscritos(Convert.ToInt32(reader["id"]))
                         });
+                    }
+
+                    foreach (Sesion sesion in sesionList) {
+                        sesion.lista_asistentes.Clear();
+                        sesion.lista_asistentes = handler.getSessionAssistants(sesion.id, personID);
                     }
                 }
                 
@@ -202,13 +210,13 @@ namespace WebApplication156456.Handlers
             return null;
         }
 
-        public Sesion getSesion(int sesionID)
+        public Sesion getSesion(int sesionID, string personID)
         {
             _dataSet = new DataSet();
             Sesion sesion = new Sesion();
             try
             {
-
+                MenuTutorHandler handler = new MenuTutorHandler();
                 SqlCommand show = new SqlCommand("get_sesion_by_id", sqlConnection);
                 SqlDataAdapter dataTableAdapter = new SqlDataAdapter(show);
                 sqlConnection.Open();
@@ -238,9 +246,12 @@ namespace WebApplication156456.Handlers
                             nombre_curso = Convert.ToString(reader["nombre_curso"]),
                             sigla_curso = Convert.ToString(reader["sigla_curso"]),
                             contrasena = Convert.ToString(reader["contrasena"]),
+                            tarifa_individual = Convert.ToInt32(reader["tarifa_individual"]),
+                            tarifa_grupal = Convert.ToInt32(reader["tarifa_grupal"]),
                             cantidad_estudiantes = getEstudiantesInscritos(Convert.ToInt32(reader["id"]))
                         };
                     }
+                    sesion.lista_asistentes = handler.getSessionAssistants(sesion.id, personID);
                 }
 
             }

@@ -37,9 +37,13 @@
                         {
                             <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.sessionList[index].id })" class="list-group-item">
                                 <h4 class="list-group-item-heading"><b>Curso: @ViewBag.sessionList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">ID Tutoría: @ViewBag.sessionList[index].tutoria_id</p>
+                                <p class="list-group-item-text">ID Sesión: @ViewBag.sessionList[index].id</p>
                                 <p class="list-group-item-text">Modalidad: @ViewBag.sessionList[index].modalidad</p>
                                 <p class="list-group-item-text">Fecha Inicio: @ViewBag.sessionList[index].fecha_inicio</p>
                                 <p class="list-group-item-text">Fecha Finalización: @ViewBag.sessionList[index].fecha_fin</p>
+                                <p class="list-group-item-text">Tarifa Individual: @ViewBag.sessionList[index].tarifa_individual</p>
+                                <p class="list-group-item-text">Tarifa Grupal: @ViewBag.sessionList[index].tarifa_grupal</p>
                                 <p class="list-group-item-text">Estado: <span style="color:orange">@ViewBag.sessionList[index].estado_sesion</span></p>
                             </a>
                         }
@@ -53,10 +57,14 @@
                         {
                             <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.sessionList[index].id })" class="list-group-item">
                                 <h4 class="list-group-item-heading"><b>Curso: @ViewBag.sessionList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">ID Tutoría: @ViewBag.sessionList[index].tutoria_id</p>
+                                <p class="list-group-item-text">ID Sesión: @ViewBag.sessionList[index].id</p>
                                 <p class="list-group-item-text">Modalidad: @ViewBag.sessionList[index].modalidad</p>
                                 <p class="list-group-item-text">Fecha Inicio: @ViewBag.sessionList[index].fecha_inicio</p>
                                 <p class="list-group-item-text">Fecha Finalización: @ViewBag.sessionList[index].fecha_fin</p>
-                                <p class="list-group-item-text">Estado: <span style="color:orange">@ViewBag.sessionList[index].estado_sesion</span></p>                                
+                                <p class="list-group-item-text">Tarifa Individual: @ViewBag.sessionList[index].tarifa_individual</p>
+                                <p class="list-group-item-text">Tarifa Grupal: @ViewBag.sessionList[index].tarifa_grupal</p>    
+                                <p class="list-group-item-text">Estado: <span style="color:orange">@ViewBag.sessionList[index].estado_sesion</span></p>                            
                             </a>
                         }
                     }
@@ -67,9 +75,13 @@
                         if (ViewBag.sessionList[index].estado_sesion == "Finalizada" || ViewBag.sessionList[index].estado_sesion == "Cancelada") {
                             <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.sessionList[index].id })" class="list-group-item">
                                 <h4 class="list-group-item-heading"><b>Curso: @ViewBag.sessionList[index].curso_id</b></h4>
+                                <p class="list-group-item-text">ID Tutoría: @ViewBag.sessionList[index].tutoria_id</p>
+                                <p class="list-group-item-text">ID Sesión: @ViewBag.sessionList[index].id</p>
                                 <p class="list-group-item-text">Modalidad: @ViewBag.sessionList[index].modalidad</p>
                                 <p class="list-group-item-text">Fecha Inicio: @ViewBag.sessionList[index].fecha_inicio</p>
                                 <p class="list-group-item-text">Fecha Finalización: @ViewBag.sessionList[index].fecha_fin</p>
+                                <p class="list-group-item-text">Tarifa Individual: @ViewBag.sessionList[index].tarifa_individual</p>
+                                <p class="list-group-item-text">Tarifa Grupal: @ViewBag.sessionList[index].tarifa_grupal</p>    
                                 @if (@ViewBag.sessionList[index].estado_sesion == "Finalizada") {
                                     <p class="list-group-item-text">Estado: <span style="color:lawngreen">@ViewBag.sessionList[index].estado_sesion</span></p>
                                     if (ViewBag.sessionList[index].evaluacion_sesion == 0) {

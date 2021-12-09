@@ -81,9 +81,6 @@ namespace WebApplication156456.Controllers
             }
 
             foreach (Sesion sesion in sessionList) {
-                sesion.lista_asistentes.Clear();
-                sesion.lista_asistentes = menuTutorHandler.getSessionAssistants(sesion.id, User.Identity.GetUserId());
-
                 if (sesion.estado_sesion == ("Esperando Respuesta")) {
                     pendingSessions++;
                 }
@@ -164,9 +161,9 @@ namespace WebApplication156456.Controllers
 
                     if (sesion.estado_sesion == "Finalizada") {
                         if (sesion.lista_asistentes.Count == 1) {
-                            potentialIncome += currentTutorship.tarifa_individual;
+                            potentialIncome += sesion.tarifa_individual;
                         } else if (sesion.lista_asistentes.Count > 1) {
-                            potentialIncome += currentTutorship.tarifa_grupal * sesion.lista_asistentes.Count;
+                            potentialIncome += sesion.tarifa_grupal * sesion.lista_asistentes.Count;
                         }
                     }
                 }
@@ -242,7 +239,7 @@ namespace WebApplication156456.Controllers
 
             updateViewBag();
             string message = "";
-            currentSession = menuTutorHandler.obtainSpecificSession(currentSessionID);
+            currentSession = menuTutorHandler.obtainSpecificSession(currentSessionID, User.Identity.GetUserId());
             string courseName = obtainCourseName(currentSession.curso_id);
             Tutor tutorInfo = menuTutorHandler.getTutorInformation(currentSession.tutor_id);
 
@@ -311,7 +308,11 @@ namespace WebApplication156456.Controllers
                 default:
                     break;
             }
-            notificationHandler.createNewNotification_Student(currentSession.estudiante_id, message);
+
+            foreach (AsistenteModel asistente in currentSession.lista_asistentes) {
+                notificationHandler.createNewNotification_Student(asistente.id_estudiante, message);
+
+            }
 
             return RedirectToAction("ViewSessions", "MenuTutor");
         }
