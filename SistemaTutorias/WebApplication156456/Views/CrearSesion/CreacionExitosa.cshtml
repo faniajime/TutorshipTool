@@ -1,5 +1,7 @@
 ﻿
-
+<html>
+<body>
+    <br /><br/>
 <h2>Creación de sesión</h2>
 
 @if (ViewBag.result == true)
@@ -7,7 +9,7 @@
     <div class="alert alert-success" role="alert">
         Su sesión fue agendada exitosamente
     </div>
-    if (ViewBag.contrasena !=null)
+    if (ViewBag.contrasena != null)
     {
         <h4>La contraseña para que otras personas puedan acceder a esta sesión es: <b>@ViewBag.contrasena</b></h4>
     }
@@ -21,4 +23,5 @@ else
     </div>
     <a href="@Url.Action("Agendar","CrearSesion",new { tutoriaID = @ViewBag.tutoriaID})" class=" btn btn-primary">Regresar a Agendar Sesion</a>
 }
-
+</body>
+</html>

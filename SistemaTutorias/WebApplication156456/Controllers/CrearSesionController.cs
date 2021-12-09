@@ -197,10 +197,11 @@ namespace WebApplication156456.Controllers
                     var start = Convert.ToDateTime(sesion.fecha_inicio).Hour * 60 + Convert.ToDateTime(sesion.fecha_inicio).Minute;
                     var end = Convert.ToDateTime(sesion.fecha_fin).Hour * 60 + Convert.ToDateTime(sesion.fecha_fin).Minute;
 
-                    scheduler.TimeSpans.Add(new DHXBlockTime()
+                    scheduler.TimeSpans.Add(new DHXMarkTime()
                     {
                         Day = day, // marks each Saturday with the 'green_section' style
-                        Zones = new List<Zone>() { new Zone { Start = start, End = end } }
+                        Zones = new List<Zone>() { new Zone { Start = start, End = end } },
+                        CssClass = "gray_section"
                     });
                 }
 
@@ -223,7 +224,7 @@ namespace WebApplication156456.Controllers
                     Day = day, // marks each Saturday with the 'green_section' style
                     Zones = new List<Zone>() { new Zone { Start = start, End = end } },
                     InvertZones = true,
-                    SpanType = DHXMarkTime.Type.BlockEvents
+                    CssClass = "gray_section"
                 });
 
                 if (days.Any(a => a == day))
@@ -239,7 +240,7 @@ namespace WebApplication156456.Controllers
                 {
                     Day = day, // marks each Saturday with the 'green_section' style
                     Zones = new List<Zone>() { new Zone { Start = start, End = end } },
-                    SpanType = DHXMarkTime.Type.BlockEvents
+                    CssClass = "gray_section"
                 });
             }
         }
