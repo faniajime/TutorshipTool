@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "DHTMLX Scheduler .NET";
+}
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Horario</title>
+    <link href="~/css/Horario.css" rel="stylesheet" />
+</head>
+<body>
+    <br />
+    @if (Equals(ViewBag.exito,"fallo"))
+    {
+        <div class="alert alert-danger" role="alert">
+            No se pudo inscribir en la sesión.
+        </div>
+
+    }
+    else if (Equals(ViewBag.exito,"exito"))
+    {
+        <div class="alert alert-success" role="alert">
+            Usted fue inscrito con éxtio en la sesión.
+        </div>
+    }
+    else if (Equals(ViewBag.exito == "inscrito"))
+    {
+        <div class="alert alert-warning" role="alert">
+            Usted ya se encuentra inscrito en la sesión.
+        </div>
+    }
+
+
+    <h1>Agendar tutoría con el tutor: @ViewBag.tutoria.tutor_nombre @ViewBag.tutoria.tutor_apellidos </h1>
+
+    <p>En esta sección podrá inscribirse en una sesión abierta o crear una nueva sesión. </p>
+    <hr />
+
+
+    <h1>Crear una sesión </h1>
+    <p>Presione este botón para crear una nueva sesión. </p>
+    <a href="@Url.Action("Agendar","CrearSesion",new { tutoriaID = ViewBag.tutoria.id})" class=" btn btn-primary">Agendar Sesion</a>
+    <hr />
+    <h1>Sesiones abiertas </h1>
+
+    @if (ViewBag.sesiones.Count > 0)
+    {
+        <div class="list-group">
+            @foreach (var sesion in ViewBag.sesiones)
+            {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 class="list-group-item-heading"><b>Curso: @sesion.nombre_curso</b></h4>
+                    <p class="list-group-item-text">Sigla curso: @sesion.sigla_curso</p>
+                    <p class="list-group-item-text">Tutor:  @ViewBag.tutoria.tutor_nombre @ViewBag.tutoria.tutor_apellidos </p>
+                    <p class="list-group-item-text">Modalidad: @sesion.modalidad</p>
+                    <p class="list-group-item-text">Máximo De Estudiantes: @ViewBag.max_est</p>
+                    <p class="list-group-item-text">Estudiantes Inscritos: @sesion.cantidad_estudiantes</p>
+                    <p class="list-group-item-text">Tarifa:  @ViewBag.tutoria.tarifa_grupal  </p>
+                    <p class="list-group-item-text">Fecha: @sesion.fecha_inicio a @sesion.fecha_fin</p>
+                    <p class="list-group-item-text">Descripción: @sesion.descripcion</p>
+
+                    <p>Esta sesión es: <b>@sesion.privacidad</b></p>
+                </div>
+                <form id="password" class="list-group-item" action="/CrearSesion/inscribirse" method="post">
+                    <div class="panel-footer">
+                        <input type="number" id="fname" name="sesionID" value="@sesion.id" hidden>
+                        <input type="number" id="fname" name="estudianteID" value="@sesion.estudiante_id" hidden>
+                        @if (sesion.privacidad == "Privada")
+                        {
+                            <label for="pass">Ingrese la clave de acceso para inscribirse:</label>
+                            <input type="text" id="fname" name="password"><br><br>
+
+
+                        }
+                        else
+                        {
+                            <input type="text" id="fname" name="pass" value="" hidden><br><br>
+                        }
+
+
+                        <input id="id_password_button" class="btn btn-primary btn-lg" name="PaswordSubmit" type="submit" value="Inscribirse &raquo" />
+                    </div>
+                </form>
+            </div>
+                <!-- Trigger the modal with a button -->
+               
+
+            }
+
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            No hay sesiones disponbiles con este tutor.
+        </div>
+    }
+
+
+    <br />
+    <hr />
+    <a href="@Url.Action("Index","Tutoria",new { courseID = ViewBag.courseID, courseName = ViewBag.courseName})" class=" btn btn-primary">Regresar</a>
+    <script>
+        $(".tab-pane a[data-toggle=tab]").on("click", function (e) {
+            if ($(this).hasClass("disabled")) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+</body>
+
+
+</html>

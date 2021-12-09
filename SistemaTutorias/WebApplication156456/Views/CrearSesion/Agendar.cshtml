@@ -1,0 +1,114 @@
+﻿@model WebApplication156456.Models.Sesion
+@{
+    ViewBag.Title = "DHTMLX Scheduler .NET";
+}
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Horario</title>
+    <link href="~/css/Horario.css" rel="stylesheet" />
+</head>
+<body>
+
+    <br />
+    @if (Equals(ViewBag.agendarError, "fallo"))
+    {
+        <div class="alert alert-danger" role="alert">
+            No se pudo crear sesión, asegurese de haber insertado la privacidad, modalidad y horario.
+        </div>
+
+    }
+    <h2>Usted está agendando una tutoría con:  @ViewBag.tutoria.tutor_nombre @ViewBag.tutoria.tutor_apellidos</h2>
+    <hr />
+    @using (Html.BeginForm("CreateTutorship", "CrearSesion", new { tutoria = @ViewBag.tutoria }))
+    {
+
+        <div class="form-group">
+
+            <h4>Especifique las características que desea para la tutoría</h4>
+            <br />
+            <p>
+                Esta tutoría es de tipo: @if (@ViewBag.tutoria.cantidad_estudiantes == 1)
+                {
+                    <b>Individual</b>
+                }
+                else
+                {
+                    <b>Grupal</b>
+                }
+            </p>
+
+            @if (Equals(ViewBag.tutoria.tipo_sesion, "Presencial"))
+            {
+                <p>Esta tutoría es de tipo:  <b>Presencial</b></p>
+            }
+            else if (Equals(ViewBag.tutoria.tipo_sesion, "Virtual"))
+            {
+
+
+                <p>Esta tutoría es de tipo:  <b>Virtual</b></p>
+            }
+            else
+            {
+                <!-- Modalidad -->
+                @Html.LabelFor(m => m.modalidad)
+                @Html.DropDownListFor(m => m.modalidad,
+                new List<SelectListItem>
+                    {
+                    new SelectListItem{ Text="Presencial", Value = "Presencial" },
+                    new SelectListItem{ Text="Virtual", Value = "Virtual" },
+                }, "Seleccionar modalidad", new { @class = "form-control" })
+
+            }
+
+
+            <br />
+
+            <!-- Privacidad -->
+
+            @Html.LabelFor(m => m.privacidad)
+            @Html.DropDownListFor(m => m.privacidad,
+            new List<SelectListItem>
+                {
+                new SelectListItem{ Text="Pública", Value = "Publica" },
+                new SelectListItem{ Text="Privada", Value = "Privada" },
+            }, "Seleccionar privacidad", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.privacidad)
+            <p>*La privacidad se refiere a si desea que otros estudiantes puedan unirse a su sesión (pública) o no (privada)</p>
+
+            <br />
+            <h4> Seleccione el horario de la sesión.</h4>
+            <li>En amarillo se muestra el día actual.</li>
+            <li>La disponibilidad del tutor se muestra en verde.</li>
+            <li>Si selecciona una sesion fuera del horario del tutor la sesión será automáticamente rechazada.</li>
+            <hr />
+            <style>
+                .input-validation-error {
+                    color: red;
+                }
+
+                .field-validation-error {
+                    border: 2px solid red;
+                }
+
+                .green_section {
+                    background-color: #77ff77;
+                    opacity: 0.4;
+                }
+
+                .gray_section {
+                    background-color: red;
+                    opacity: 0.3;
+                }
+            </style>
+            <div class="scheduler_container">
+                @Html.Raw(ViewBag.scheduler.Render())
+            </div>
+            <br />
+        </div>
+        <button type="submit" class="btn btn-primary">Agendar Sesión</button>
+        <a href="@Url.Action("Index","CrearSesion", new { tutoriaId = @ViewBag.tutoria.id,  courseID = @ViewBag.tutoria.cursoid, courseName = @ViewBag.tutoria.nombre_curso})" class=" btn btn-primary">Regresar a sesiones</a>
+
+
+    }
+</body>

@@ -25,7 +25,9 @@ namespace PruebaAzure.Models
         public string area { get; set; }
         public int stars { get; set; }
 
+        public int open_sessions { get; set; }
         public string tutor_pid { get; set; }
+        public bool scheduled { get; set; }
 
     }
 }

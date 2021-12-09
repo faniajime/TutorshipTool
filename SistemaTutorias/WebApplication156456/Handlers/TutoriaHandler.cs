@@ -20,6 +20,7 @@ namespace WebApplication156456.Handlers
         {
             connection_path = ConfigurationManager.ConnectionStrings["PICONNECTION"].ToString();
             connection = new SqlConnection(connection_path);
+            
         }
 
         public IList<Tutoria> GetTutorshipsList(string cursoID)
@@ -37,6 +38,7 @@ namespace WebApplication156456.Handlers
                 _adapter = new SqlDataAdapter(show);
                 _adapter.Fill(_dataSet);
                 connection.Close();
+                var session_handler = new SesionHandler();
 
                 if (_dataSet.Tables.Count > 0)
                 {
@@ -56,6 +58,7 @@ namespace WebApplication156456.Handlers
                         obj.nombre = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombre"]);
                         obj.area = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombre_area"]);
                         obj.stars = Convert.ToInt32(Convert.ToInt32(obj.calificacion_tutoria) / 2);
+                        obj.open_sessions = session_handler.getCantidadSesiones(obj.id);
                         tutoriasList.Add(obj);
                     }
                 }
@@ -68,6 +71,8 @@ namespace WebApplication156456.Handlers
             }
             return tutoriasList;
         }
+
+
 
         public Tutoria GetTutoria(int tutoriaid)
         {

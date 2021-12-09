@@ -36,9 +36,29 @@ namespace WebApplication156456.Handlers
             
             if (_dataSet.Tables.Count > 0)
             {
-                return Convert.ToInt32(_dataSet.Tables[0].Rows[0][0]);
+                return Convert.ToInt32(_dataSet.Tables[0].Rows[0]["id"]);
             }
             return -1;
+
+
+        }
+        public string getTutorIdFromPID(int tutorid)
+        {
+
+            sqlConnection.Open();
+            SqlCommand insert = new SqlCommand("get_tutor_from_pid", sqlConnection);
+            insert.CommandType = CommandType.StoredProcedure;
+            insert.Parameters.AddWithValue("@id_tutor", tutorid);
+            _adapter = new SqlDataAdapter(insert);
+            _dataSet = new DataSet();
+            _adapter.Fill(_dataSet);
+            sqlConnection.Close();
+
+            if (_dataSet.Tables.Count > 0)
+            {
+                return Convert.ToString(_dataSet.Tables[0].Rows[0]["pid"]);
+            }
+            return "Not found";
 
 
         }

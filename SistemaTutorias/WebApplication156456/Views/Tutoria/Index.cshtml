@@ -36,6 +36,7 @@
                             <p class="card-text"><b>Cantidad de estudiantes:</b> @tutoria.cantidad_estudiantes</p>
                             <p class="card-text"><b>Tarifa individual: </b> @tutoria.tarifa_individual</p>
                             <p class="card-text"><b>Tarifa grupal:</b> @tutoria.tarifa_grupal</p>
+
                             <p class="card-text">
                                 <b>Calificación de tutoría:</b>
                                 @for (int i = 0; i < tutoria.stars; i++)
@@ -51,11 +52,33 @@
                                     </svg>
                                 }
                             </p>
+                            <p class="card-text">
+                                <b>Para esta tutoría hay: </b>
+                                @if (@tutoria.open_sessions > 0)
+                                {
+                                    <b style="color:green;">@tutoria.open_sessions
+                                        sesiones 
+                                    </b>
+                                }
+                                else
+                                {
+
+                            <b style="color: gray;">
+                                @tutoria.open_sessions sesiones </b>
+                                                                }
+                            <b>abiertas </b>
+</p>
+                            </div>
+                        
+                            @if (@tutoria.open_sessions > 0)
+                            {
+                             <a href="@Url.Action("Index","CrearSesion", new { tutoriaId = tutoria.id,  courseID = ViewBag.courseID, courseName = ViewBag.courseName, openSessions = tutoria.open_sessions})" class=" btn btn-primary">Inscribirse o crear sesión</a>
+                             }
+                            else
+                            {
+                                <a href="@Url.Action("Index","CrearSesion", new { tutoriaId = tutoria.id,  courseID = ViewBag.courseID, courseName = ViewBag.courseName, openSessions = tutoria.open_sessions})" class=" btn btn-primary">Crear Sesión</a>
+                            }
                         </div>
-                        <a href="@Url.Action("Index","DisponibilidadSesion", new { tutoriaId = tutoria.id,  courseID = ViewBag.courseID, courseName = ViewBag.courseName})" class=" btn btn-primary">Solicitar tutoría</a>
-                    </div>
-
-
                 }
             </div>
         }
