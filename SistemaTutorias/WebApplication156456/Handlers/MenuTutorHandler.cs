@@ -38,28 +38,39 @@ namespace WebApplication156456.Handlers
 
         public List<Tutoria> obtainTutorTutorships(string personID) {
             List<Tutoria> tutorshipList = new List<Tutoria>();
-            string sqlQuery = 
-                "select * from tutoria " +
-                "inner join tutor on tutoria.tutorID = tutor.id " +
-                "where tutor.personID= " + "\'" + personID + "\'";
-            DataTable resultingTable = obtainDataTableFromQuery(sqlQuery);
 
-            foreach (DataRow row in resultingTable.Rows) {
-                tutorshipList.Add(
-                    new Tutoria { 
-                        tutoria_id = Convert.ToInt32(row["id"]),
-                        tutor_id = Convert.ToInt32(row["tutorID"]),
-                        curso_id = Convert.ToString(row["cursoid"]),
-                        tipo_sesion = Convert.ToString(row["tipo_sesion"]),
-                        cantidad_estudiantes = Convert.ToInt32(row["cantidad_estudiantes"]),
-                        tarifa_individual = Convert.ToInt32(row["tarifa_individual"]),
-                        tarifa_grupal = Convert.ToInt32(row["tarifa_grupal"]),
-                        calificacion_tutoria = (float)Convert.ToDouble(row["calificacion_tutoria"])
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Tutoria_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "RetrieveByPersonID";
+                sqlQueryCommand.Parameters.Add("@personID", SqlDbType.NVarChar).Value = personID;
+
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        tutorshipList.Add(
+                            new Tutoria {
+                                tutoria_id = Convert.ToInt32(reader["id"]),
+                                tutorID = Convert.ToInt32(reader["tutorID"]),
+                                curso_id = Convert.ToString(reader["cursoid"]),
+                                tipo_sesion = Convert.ToString(reader["tipo_sesion"]),
+                                cantidad_estudiantes = Convert.ToInt32(reader["cantidad_estudiantes"]),
+                                tarifa_individual = Convert.ToInt32(reader["tarifa_individual"]),
+                                tarifa_grupal = Convert.ToInt32(reader["tarifa_grupal"]),
+                                calificacion_tutoria = Convert.ToDouble(reader["calificacion_tutoria"]),
+                            }
+                        );
                     }
-                );
+                }
+                sqlConnection.Close();
             }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+
             return tutorshipList;
         }
+
 
         public List<Sesion> obtainTutorSessions(string personID) {
             List<Sesion> sessionList = new List<Sesion>();
@@ -343,6 +354,79 @@ namespace WebApplication156456.Handlers
             }
 
             return tutor;
+        }
+
+        public void updateTutorshipRating(int tutorshipID) {
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "UpdateTutorshipRating";
+                sqlQueryCommand.Parameters.Add("@tutorship_ID", SqlDbType.Int).Value = tutorshipID;
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+        }
+
+        public List<int> getTutorshipIDs(string personID) {
+            List<int> idList = new List<int>();
+
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Tutoria_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "RetrieveTutorshipIDs";
+                sqlQueryCommand.Parameters.Add("@personID", SqlDbType.NVarChar).Value = personID;
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        int value = Convert.ToInt32(reader["id"]);
+                        idList.Add(value);
+                    }
+                }
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+
+            return idList;
+        }
+
+        public List<AsistenteModel> getSessionAssistants(int sessionID, string personID) {
+            List<AsistenteModel> assistantList = new List<AsistenteModel>();
+
+            try {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "RetrieveSessionAssistants";
+                sqlQueryCommand.Parameters.Add("@person_ID", SqlDbType.NVarChar).Value = personID;
+                sqlQueryCommand.Parameters.Add("@session_id", SqlDbType.Int).Value = sessionID;
+
+                using (SqlDataReader reader = sqlQueryCommand.ExecuteReader()) {
+                    while (reader.Read()) {
+                        assistantList.Add( 
+                            new AsistenteModel {
+                                id_estudiante = Convert.ToInt32(reader["id_estudiante"]),
+                                id_sesion = Convert.ToInt32(reader["id_sesion"]),
+                                evaluacion_individual = Convert.ToInt32(reader["evaluacion_individual"]),
+                                evaluacion_tutor = Convert.ToInt32(reader["evaluacion_tutor"]),
+                                nombre_estudiante = Convert.ToString(reader["nombre_estudiante"]),
+                                apellido_estudiante = Convert.ToString(reader["apellido_estudiante"]),
+                            }
+                        );
+                    }
+                }
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException) {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+
+            return assistantList;
         }
     }
 }

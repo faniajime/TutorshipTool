@@ -101,13 +101,9 @@
             <br />
 
             <div class="list-group">
-                @if (@ViewBag.tutorshipList.Count == 0)
-                {
-                    <h4>Usted no tiene tutorías registradas</h4> }
-                else
-                {
-                    for (int index = 0; index < @ViewBag.tutorshipList.Count; index++)
-                    {
+                @if (@ViewBag.tutorshipList.Count == 0) {
+                    <h4>Usted no tiene tutorías registradas</h4> } else {
+                    for (int index = 0; index < @ViewBag.tutorshipList.Count; index++) {
                         <a href="@Url.Action("SelectCourse", "MenuTutor", new { tutorshipID = ViewBag.tutorshipList[index].tutoria_id })" class="list-group-item">
                             <h4 class="list-group-item-heading"><b>Curso: @ViewBag.tutorshipList[index].curso_id</b></h4>
                             <p class="list-group-item-text">Nombre Curso: @ViewBag.tutorshipList[index].nombre_curso</p>
@@ -116,8 +112,16 @@
                             <p class="list-group-item-text">Máximo De Estudiantes: @ViewBag.tutorshipList[index].cantidad_estudiantes</p>
                             <p class="list-group-item-text">Tarifa Individual: @ViewBag.tutorshipList[index].tarifa_individual</p>
                             <p class="list-group-item-text">Tarifa Grupal: @ViewBag.tutorshipList[index].tarifa_grupal</p>
-                            <p class="list-group-item-text">Calificación: @ViewBag.tutorshipList[index].calificacion_tutoria</p>
-                        </a>}
+
+                            @if (@ViewBag.tutorshipList[index].calificacion_tutoria <= 4.0) {
+                                <p class="list-group-item-text">Calificación: <span style="color:red">@ViewBag.tutorshipList[index].calificacion_tutoria</span></p>                
+                            } else if (@ViewBag.tutorshipList[index].calificacion_tutoria > 4.0 && @ViewBag.tutorshipList[index].calificacion_tutoria <= 7.0) {
+                                <p class="list-group-item-text">Calificación: <span style="color:orange">@ViewBag.tutorshipList[index].calificacion_tutoria</span></p>
+                            } else { 
+                                <p class="list-group-item-text">Calificación: <span style="color:green">@ViewBag.tutorshipList[index].calificacion_tutoria</span></p>
+                            }
+                        </a>
+                    }
                 }
             </div>
 

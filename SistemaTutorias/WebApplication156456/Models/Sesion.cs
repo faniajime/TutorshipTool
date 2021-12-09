@@ -8,6 +8,11 @@ using System.ComponentModel.DataAnnotations;
 namespace WebApplication156456.Models
 {
     public class Sesion {
+
+        public Sesion() {
+            lista_asistentes = new List<AsistenteModel>();
+        
+        }
         public int id { set; get; }
         public int estudiante_id { set; get; }
         public int tutor_id { set; get; }  
@@ -40,6 +45,6 @@ namespace WebApplication156456.Models
         public int tarifa_grupal { set; get; }
         public string texto { set; get; }
         public string privacidad { set; get; }
-        
+        public List<AsistenteModel> lista_asistentes { set; get; }        
     }
 }
