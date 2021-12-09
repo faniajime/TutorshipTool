@@ -117,7 +117,6 @@ namespace WebApplication156456.Controllers
         {
             
             valor = selectedValue;
-            System.Diagnostics.Debug.WriteLine("bhdhsdbsahkdhbsahdbahdbsahdbsahd     " + valor);
             Cursos obj = new Cursos();
             obj.Filter = selectedValue;
             return valor;
