@@ -59,6 +59,9 @@ namespace WebApplication156456.Handlers
                         sesion.tarifa_grupal = Convert.ToInt32(_dataSet.Tables[0].Rows[i]["tarifaGrup"]);
                         sesion.evaluacion_sesion = Convert.ToInt32(_dataSet.Tables[0].Rows[i]["evaluacionSesion"]);
                         sesion.estado_sesion = Convert.ToString(_dataSet.Tables[0].Rows[i]["estadoSesion"]);
+                        sesion.estudiante_id = Convert.ToInt32(_dataSet.Tables[0].Rows[i]["estudianteID"]);
+                        sesion.contrasena = Convert.ToString(_dataSet.Tables[0].Rows[i]["contrasena"]);
+                        sesion.privacidad = Convert.ToString(_dataSet.Tables[0].Rows[i]["privacidad"]);
                         sessionList.Add(sesion);
                         System.Diagnostics.Debug.WriteLine(sesion.nombre_curso);
                     }

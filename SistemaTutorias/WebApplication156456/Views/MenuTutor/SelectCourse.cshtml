@@ -23,110 +23,176 @@
 </head>
 
 <body>
-    <br /><br /><br />
-    <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
-        <div id="id_selectCourse_tutorship">
-            <div>
-                <br />
-                <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
-                <br />
-                <h3 class="customHeader">Editar Tutoría</h3>
-                <br />
-            </div>
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-lg-5">
+            <h3 class="customHeader">Editar Tutoría</h3>
+            <br />
+            <br />
 
-            <div id="id_selectCourse_labels" class="row list-group">
-                <div class="col-md-4 list-group-item">
-                    <h4>ID De La Tutoría: @ViewBag.currentTutorship.tutoria_id</h4>
-                    <h4>Sigla Del Curso: @ViewBag.currentTutorship.curso_id</h4>
-                    <h4>Nombre Del Curso: @ViewBag.currentTutorship.nombre_curso</h4>
+            <div style="text-align:left;">
+                <div>
+                    <div id="id_selectCourse_tutorship">
+                        <div id="id_selectCourse_labels" class="list-group">
+                            <div class="list-group-item">
+                                <h4>ID De La Tutoría: @ViewBag.currentTutorship.tutoria_id</h4>
+                                <h4>Sigla Del Curso: @ViewBag.currentTutorship.curso_id</h4>
+                                <h4>Nombre Del Curso: @ViewBag.currentTutorship.nombre_curso</h4>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div id="id_selectCourse_inputFields" class="list-group">
+                            <div class="list-group-item">
+                                <form id="form" action="/MenuTutor/SubmitTutorship" method="post">
+                                    <label for="id_selectCourse_inputFields_dropdownMenu">Modalidad De La Tutoría</label>
+                                    <br />
+                                    <select id="id_selectCourse_inputFields_dropdownMenu" name="tutorshipModality">
+                                        @if (ViewBag.currentTutorship.tipo_sesion == "Virtual") {
+                                            <option value="Virtual" selected>
+                                                Virtual
+                                            </option>
+                                        } else {
+                                            <option value="Virtual">
+                                                Virtual
+                                            </option>
+                                        }
+
+                                        @if (ViewBag.currentTutorship.tipo_sesion == "Presencial") {
+                                            <option value="Presencial" selected>
+                                                Presencial
+                                            </option>
+                                        } else {
+                                            <option value="Presencial">
+                                                Presencial
+                                            </option>
+                                        }
+
+                                        @if (ViewBag.currentTutorship.tipo_sesion == "Cualquiera") {
+                                            <option value="Cualquiera" selected>
+                                                Cualquiera
+                                            </option>
+                                        } else {
+                                            <option value="Cualquiera">
+                                                Cualquiera
+                                            </option>
+                                        }
+                                    </select>
+
+                                    <input name="inputTutorshipID" type="number" min="1" value="@ViewBag.currentTutorship.tutoria_id" hidden />
+
+                                    <br />
+                                    <br />
+
+                                    <label for="id_selectCourse_maxStudents">Cantidad Máxima de Estudiantes</label>
+                                    <br />
+                                    <input id="id_selectCourse_maxStudents" name="inputMaxStudents" size="7" type="number" min="1" max="30" value="@ViewBag.currentTutorship.cantidad_estudiantes" />
+
+                                    <br />
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="id_selectCourse_individualFare">Tarifa Individual</label>
+                                            <br />
+                                            <input id="id_selectCourse_individualFare" name="inputIndividualFare" size="7" type="number" min="0" max="100000" value="@ViewBag.currentTutorship.tarifa_individual" />
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="id_selectCourse_groupFare">Tarifa Grupal</label>
+                                            <br />
+                                            <input id="id_selectCourse_groupFare" name="inputGroupFare" size="7" type="number" min="0" max="100000" value="@ViewBag.currentTutorship.tarifa_grupal" />
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input id="edit_tutorship" name="tutorshipSubmitButton" class="btn btn-primary btn-sm" type="submit" value="Aceptar Cambios &raquo" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button id="prueba" class="btn btn-primary btn-sm" style="background-color:crimson">Borrar Tutoría</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-lg-6">
+            <h3 class="customHeader">Historial</h3>
             <br />
+            <br />
+            <div style="text-align:left;">
+                <div>
+                    <div id="id_selectCourse_tutorship_history">
+                        <div id="id_selectCourse_labels_history">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    @if (@ViewBag.currentTutorship.calificacion_tutoria <= 4.0) {
+                                        <h4>Calificación Promedio: <span style="color:red">@ViewBag.currentTutorship.calificacion_tutoria</span></h4>
+                                    } else if (@ViewBag.currentTutorship.calificacion_tutoria > 4.0 && @ViewBag.currentTutorship.calificacion_tutoria <= 7.0) {
+                                        <h4>Calificación Promedio: <span style="color:orange">@ViewBag.currentTutorship.calificacion_tutoria</span></h4>
+                                    } else {
+                                        <h4>Calificación Promedio: <span style="color:green">@ViewBag.currentTutorship.calificacion_tutoria</span></h4>
 
-            <div id="id_selectCourse_inputFields" class="row list-group">
-                <div class="col-md-4 list-group-item">
-                    <form id="form" action="/MenuTutor/SubmitTutorship" method="post">
-                        <h4>Modalidad De La Tutoría</h4>
-                        <select id="id_selectCourse_inputFields_dropdownMenu" name="tutorshipModality">
-                            @if (ViewBag.currentTutorship.tipo_sesion == "Virtual")
-                            {
-                                <option value="Virtual" selected>
-                                    Virtual
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="Virtual">
-                                    Virtual
-                                </option>
-                            }
-
-                            @if (ViewBag.currentTutorship.tipo_sesion == "Presencial")
-                            {
-                                <option value="Presencial" selected>
-                                    Presencial
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="Presencial">
-                                    Presencial
-                                </option>
-                            }
-
-                            @if (ViewBag.currentTutorship.tipo_sesion == "Cualquiera")
-                            {
-                                <option value="Cualquiera" selected>
-                                    Cualquiera
-                                </option>
-                            }
-                            else
-                            {
-                                <option value="Cualquiera">
-                                    Cualquiera
-                                </option>
-                            }
-                        </select>
-
-                        <input name="inputTutorshipID" type="number" min="1" value="@ViewBag.currentTutorship.tutoria_id" hidden />
-
-                        <br />
-                        <br />
-
-                        <h4>Cantidad Máxima de Estudiantes</h4>
-                        <input name="inputMaxStudents" type="number" min="1" max="30" value="@ViewBag.currentTutorship.cantidad_estudiantes" />
-
-                        <br />
-                        <br />
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Tarifa Individual</h4>
-                                <input name="inputIndividualFare" type="number" min="0" max="100000" value="@ViewBag.currentTutorship.tarifa_individual" />
+                                    }
+                                    <h4>Tutorías Impartidas: @ViewBag.specificSessions.Count</h4>
+                                    <h4>Ingresos Estimados: @ViewBag.income</h4>
+                                </div>
                             </div>
+                            <br />
 
-                            <div class="col-md-6">
-                                <h4>Tarifa Grupal</h4>
-                                <input name="inputGroupFare" type="number" min="0" max="100000" value="@ViewBag.currentTutorship.tarifa_grupal" />
-                            </div>
+                            @for (int index = 0; index < ViewBag.specificSessions.Count; index++) {
+                                <div class="list-group">
+                                    <a href="@Url.Action("AdministerSessionRequest", "MenuTutor", new {sessionID = ViewBag.specificSessions[index].id })" class="list-group-item">
+                                        <div>
+                                            <p>ID: @ViewBag.specificSessions[index].id</p>
+                                            <p>Fecha Inicio: @ViewBag.specificSessions[index].fecha_inicio</p>
+                                            <p>Fecha Finalización: @ViewBag.specificSessions[index].fecha_fin</p>
+                                            <p>Modalidad: @ViewBag.specificSessions[index].modalidad</p>
+                                            @if (@ViewBag.specificSessions[index].estado_sesion == "Finalizada") {
+                                                if (@ViewBag.specificSessions[index].evaluacion_sesion <= 4.0) {
+                                                    <p>Calificación: <span style="color:red">@ViewBag.specificSessions[index].evaluacion_sesion</span></p>
+                                                } else if (@ViewBag.specificSessions[index].evaluacion_sesion > 4.0 && @ViewBag.specificSessions[index].evaluacion_sesion <= 7.0) {
+                                                    <p>Calificación: <span style="color:orange">@ViewBag.specificSessions[index].evaluacion_sesion</span></p>
+                                                } else {
+                                                    <p>Calificación: <span style="color:green">@ViewBag.specificSessions[index].evaluacion_sesion</span></p>
+                                                }
+                                            }
+
+                                            @if (@ViewBag.specificSessions[index].estado_sesion == "Finalizada") {
+                                                <p>Estado: <span style="color:greenyellow">@ViewBag.specificSessions[index].estado_sesion</span></p>
+                                            } else {
+                                                <p>Estado: <span style="color:red">@ViewBag.specificSessions[index].estado_sesion</span></p>
+                                            }
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            }
                         </div>
-
-                        <br />
-                        <br />
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input id="edit_tutorship" name="tutorshipSubmitButton" class="btn btn-primary btn-lg" type="submit" value="Aceptar Cambios &raquo" />
-                            </div>
-                            <div class="col-md-6">
-                                <button id="prueba" class="btn btn-primary btn-lg" style="background-color:crimson">Borrar Tutoría</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        <br />
+        <a href="@Url.Action("MenuTutor", "MenuTutor")" class=" btn btn-primary btn-lg">Regresar</a>
+        <br />
     </div>
     <script type="text/javascript">
             document.querySelector("#edit_tutorship").addEventListener('click', function () {
