@@ -9,13 +9,13 @@
 
 th {
     text-align: center;
-    background-color: #3498DB;
-    
+    background-color: #17709e;
+    color: white;
 }
 
 td {
     text-align: center;
-    background-color: white;
+    background-color: #f8efed;
 }
 
 .div1 {
@@ -25,7 +25,7 @@ td {
 }
 
 body {
-    background-color: #D6EAF8;
+    background-color: white;
 }
 
 table {
@@ -42,7 +42,7 @@ table {
 .tableFixHead thead th {
     position: sticky;
     top: 0;
-    z-index: 1;
+    
 }
 
 #filters{

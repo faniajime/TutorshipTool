@@ -7,17 +7,15 @@
     font-weight: bold;
 }
 
-.card-head
-{   
-    padding:5px;
-    background-color: #3498DB;
+.card-head {
+    padding: 5px;
+    background-color: #17709e;
     border-block-color: gray;
 }
 .card-header {
     color: white;
-    background-color: #3498DB;
+    background-color: #17709e;
     padding: 5px;
-
 }
 
 
@@ -33,7 +31,7 @@ hr {
 
 body {
     font-family: 'Enriqueta', arial, serif;
-    background-color: #D6EAF8;
+    background-color: #f8efed;
 }
 
 .card {

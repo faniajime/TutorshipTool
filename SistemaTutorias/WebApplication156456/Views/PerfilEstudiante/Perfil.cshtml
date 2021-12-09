@@ -6,6 +6,7 @@
 
 <html>
 <head>
+    <link href="~/css/PerfilEstudiante.css" rel="stylesheet" />
     <title>Perfil de estudiante</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
         <h1>Sesiones </h1>
     </div>
     <div id="exTab3" class="container">
-        <ul class="nav nav-pills">
+        <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#1b" data-toggle="tab">Tutorías por venir</a>
             </li>
@@ -32,8 +33,8 @@
                 {
                     if (ViewBag.sesions[index].estado_sesion == "Pendiente")
                     {
-                        <div class="card" style="background-color: #D6EAF8;">
-                            <div class="card-head" style="background-color: #3498DB;">
+                        <div class="card" style="background-color: #f8efed;">
+                            <div class="card-head" style="background-color: #17709e; color:white">
                                 <h4 class="card-header text-center"><b>@ViewBag.sesions[index].nombre_curso</b></h4>
                             </div>
                             <div class="card-body">
@@ -102,8 +103,8 @@
                     if (ViewBag.sesions[index].estado_sesion == "Esperando Respuesta")
                     {
 
-                        <div class="card" style="background-color: #D6EAF8;">
-                            <div class="card-head" style="background-color: #3498DB;">
+                        <div class="card" style="background-color: #f8efed;">
+                            <div class="card-head" style="background-color: #17709e; color:white">
                                 <h4 class="card-header text-center"><b>@ViewBag.sesions[index].nombre_curso</b></h4>
                             </div>
                             <div class="card-body">
@@ -171,8 +172,8 @@
                     if (ViewBag.sesions[index].estado_sesion == "Cancelada" || ViewBag.sesions[index].estado_sesion == "Finalizada")
                     {
 
-                        <div class="card" style="background-color: #D6EAF8;">
-                            <div class="card-head" style="background-color: #3498DB;">
+                        <div class="card" style="background-color: #f8efed;">
+                            <div class="card-head" style="background-color: #17709e; color:white">
                                 <h4 class="card-header text-center"><b>@ViewBag.sesions[index].nombre_curso</b></h4>
                             </div>
                             <div class="card-body">

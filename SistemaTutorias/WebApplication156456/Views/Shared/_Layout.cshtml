@@ -9,50 +9,41 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/bootstrap-chosen.css" rel="stylesheet" />
-
-
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
+    <link href="~/css/PaginaPrincipal.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" ">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                @Html.ActionLink("TutorMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                    @if (ViewContext.HttpContext.User.IsInRole("Estudiante"))
-                    {
-                        <li>@Html.ActionLink("Cursos disponibles", "Index", "Cursos")</li>
-                        <li>@Html.ActionLink("Mis sesiones", "Perfil", "PerfilEstudiante")</li>
-                    }
-                    @if (ViewContext.HttpContext.User.IsInRole("Tutor"))
-                    {
-                        <li>@Html.ActionLink("Administrar perfil", "MenuTutor", "MenuTutor")</li>
-                    }
-
-
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+    <div class="header">
+        <div style="margin-left: 68%">@Html.ActionLink("TutorMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", style = "color:white"})</div>
+        <div style="margin-right:5%">@Html.Partial("_LoginPartial")</div>
     </div>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+        <div class="spinner diagonal part-1"></div>
+        <div class="spinner horizontal"></div>
+        <div class="spinner diagonal part-2"></div>
+    </label>
+    <div id="sidebarMenu">
+        <ul class="sidebarMenuInner">
+            @if (ViewContext.HttpContext.User.IsInRole("Estudiante"))
+            {
+                <li>@Html.ActionLink("Cursos disponibles", "Index", "Cursos")</li>
+                <li>@Html.ActionLink("Mis sesiones", "Perfil", "PerfilEstudiante")</li>
+            }
+            @if (ViewContext.HttpContext.User.IsInRole("Tutor"))
+            {
+                <li>@Html.ActionLink("Administrar perfil", "MenuTutor", "MenuTutor")</li>
+            }
+        </ul>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - TutorMe Team</p>
-        </footer>
     </div>
-
+    <br /><br />
+    <footer>
+        <div style="height: 60px; color: white";text-align><p style="background-color: #123f7d">&copy; @DateTime.Now.Year - TutorMe Team</p></div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
