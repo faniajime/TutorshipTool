@@ -111,7 +111,7 @@ namespace WebApplication156456.Handlers
             } catch (SqlException sqlException) {
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
             }
-
+            sqlConnection.Close();
             return sessionList;
         }
 

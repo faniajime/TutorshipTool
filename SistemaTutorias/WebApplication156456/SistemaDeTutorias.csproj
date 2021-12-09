@@ -318,13 +318,12 @@
     <Compile Include="Controllers\PerfilEstudianteController.cs" />
     <Compile Include="Handlers\NotificacionHandler.cs" />
     <Compile Include="Handlers\PerfilEstudianteHandler.cs" />
-    <Compile Include="Models\AsistenteModel.cs" />
-    <Compile Include="Models\Notificacion.cs" />
+    <Compile Include="Handlers\SesionHandler.cs" />
     <Compile Include="Models\PerfilEstudiante.cs" />
     <Compile Include="Models\SesionHorario.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
-    <Compile Include="Controllers\DisponibilidadSesionController.cs" />
+    <Compile Include="Controllers\CrearSesionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -759,13 +758,13 @@
     <Content Include="Views\Horario\Index.cshtml" />
     <Content Include="Views\MenuTutor\ViewSessions.cshtml" />
     <Content Include="Views\MenuTutor\AdministerSessionRequest.cshtml" />
-    <Content Include="Views\DisponibilidadSesion\Index.cshtml" />
+    <Content Include="Views\CrearSesion\Index.cshtml" />
     <Content Include="Views\PerfilEstudiante\Perfil.cshtml" />
+    <Content Include="Views\CrearSesion\CreacionExitosa.cshtml" />
+    <Content Include="Views\CrearSesion\Agendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Calendar\" />
-    <Folder Include="Views\SesionModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
