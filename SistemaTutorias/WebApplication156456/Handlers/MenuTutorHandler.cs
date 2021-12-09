@@ -380,6 +380,41 @@ namespace WebApplication156456.Handlers
                 System.Diagnostics.Debug.WriteLine(sqlException.ToString());
             }
         }
+        public void updateTutorshipRatingFromSID(int sessionID)
+        {
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "UpdateTutorshipRatingFromSID";
+                sqlQueryCommand.Parameters.Add("@session_id", SqlDbType.Int).Value = sessionID;
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException)
+            {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+        }
+
+        public void updateSessionRating(int sessionID)
+        {
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand sqlQueryCommand = new SqlCommand("Sesion_CRUD", sqlConnection);
+                sqlQueryCommand.CommandType = CommandType.StoredProcedure;
+                sqlQueryCommand.Parameters.Add("@mode", SqlDbType.NVarChar).Value = "UpdateSessionRating";
+                sqlQueryCommand.Parameters.Add("@session_id", SqlDbType.Int).Value = sessionID;
+                sqlQueryCommand.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            catch (SqlException sqlException)
+            {
+                System.Diagnostics.Debug.WriteLine(sqlException.ToString());
+            }
+        }
 
         public List<int> getTutorshipIDs(string personID) {
             List<int> idList = new List<int>();

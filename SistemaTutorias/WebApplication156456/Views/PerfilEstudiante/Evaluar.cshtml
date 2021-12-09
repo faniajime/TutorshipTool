@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "PerfilEstudiante";
+}
+
+<html>
+<head>
+    <link href="~/css/PerfilEstudiante.css" rel="stylesheet" />
+    <title>Perfil de estudiante</title>
+</head>
+<body>
+
+    <br /><br /><br />
+    <br />
+    @if (ViewBag.thiserror == "true")
+    {
+        <div class="alert alert-danger" role="alert">
+            No se pudo evaluar la sesión.
+        </div>
+    }
+    <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
+        <div id="id_administerSessionRequest_details">
+            <div>
+                <h3 class="customHeader">Evaluar Sesión con: @ViewBag.sesion.nombre_tutor @ViewBag.sesion.apellido_tutor</h3>
+                <br />
+                <form id="evaluar" class="list-group-item" action="/PerfilEstudiante/enviarEvaluacion" method="post">
+                    <input type="number" id="fname" name="sesionID" value="@ViewBag.sesion.id" hidden>
+                    <input type="number" id="fname" name="estudianteID" value="@ViewBag.estudianteID" hidden>
+                    <label for="pass">Ingrese la calificación que le da al tutor</label>
+                    <input type="number" id="fname" name="evaluacion" min="1" max="10"><br><br>
+                    <input id="id_password_button" class="btn btn-primary btn-lg" name="SubmitEvaluacion" type="submit" value="Evaluar &raquo" />
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</body>

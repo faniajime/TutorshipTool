@@ -46,6 +46,7 @@ namespace WebApplication156456.Handlers
                     for (int i = 0; i < _dataSet.Tables[0].Rows.Count; i++)
                     {
                         Sesion sesion = new Sesion();
+                        sesion.id = Convert.ToInt32(_dataSet.Tables[0].Rows[i]["id"]);
                         sesion.nombre_curso = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombreCurso"]);
                         sesion.nombre_tutor = Convert.ToString(_dataSet.Tables[0].Rows[i]["nombreTutor"]);
                         sesion.apellido_tutor = Convert.ToString(_dataSet.Tables[0].Rows[i]["apellidoTutor"]);
@@ -76,6 +77,19 @@ namespace WebApplication156456.Handlers
 
             return sessionList;
         }
-        
+        public void evaluarSesion(int sesionID,  int studentID, int calificacion)
+        {
+
+            sqlConnection.Open();
+
+            SqlCommand update = new SqlCommand("calificar_sesion", sqlConnection);
+            update.CommandType = CommandType.StoredProcedure;
+            update.Parameters.AddWithValue("@sesion_id", sesionID);
+            update.Parameters.AddWithValue("@calificacion", calificacion);
+            update.Parameters.AddWithValue("@student_id", studentID);
+            update.ExecuteNonQuery();
+            sqlConnection.Close();
+            
+        }
     }
 }
