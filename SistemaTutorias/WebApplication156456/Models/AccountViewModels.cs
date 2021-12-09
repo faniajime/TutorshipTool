@@ -58,7 +58,7 @@ namespace WebApplication156456.Models
         [Display(Name = "Contraseña")]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme?")]
+        [Display(Name = "Recordarme")]
         public bool RememberMe { get; set; }
     }
 

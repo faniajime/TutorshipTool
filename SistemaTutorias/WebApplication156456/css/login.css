@@ -1,0 +1,15 @@
+﻿.nav .navbar-nav .navbar-right {
+    color: #000000;
+    font-size: 1.1em;
+}
+
+.nav .navbar-nav .navbar-right {
+    background-color: #b2fefa;
+    color: #000000;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    background-color: transparent !important;
+}
+
