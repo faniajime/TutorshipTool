@@ -22,6 +22,8 @@ namespace WebApplication156456.Controllers
         private List<Tutoria> tutorshipList { set; get; }
         private List<Cursos> coursesList { set; get; }
         private List<Sesion> sessionList { set; get; }
+        private List<Sesion> specificTutorshipSessions { set; get; }
+        private List<int> tutorshipIDs { set; get; }
         private int pendingSessions { set; get; }
         private Sesion currentSession { set; get; }
 
@@ -32,6 +34,12 @@ namespace WebApplication156456.Controllers
             tutorMenuInstance = new MenuTutorModel();
             menuTutorHandler = new MenuTutorHandler();
             notificationHandler = new NotificacionHandler();
+
+            tutorshipList = new List<Tutoria>();
+            coursesList = new List<Cursos>();
+            sessionList = new List<Sesion>();
+            tutorshipIDs = new List<int>();
+            specificTutorshipSessions = new List<Sesion>();
         }
 
         private List<Tutoria> obtainTutorships() {
@@ -46,18 +54,36 @@ namespace WebApplication156456.Controllers
             return menuTutorHandler.obtainAllCourses();
         }
 
+        private List<int> obtainTutorshipIDs() {
+            return menuTutorHandler.getTutorshipIDs(User.Identity.GetUserId());
+        }
+
         private void updateViewBag() {
             ViewBag.province = tutorMenuInstance.regionProvince;
             ViewBag.city = tutorMenuInstance.regionCity;
             ViewBag.district = tutorMenuInstance.regionDistrict;
             ViewBag.details = tutorMenuInstance.regionDetails;
 
+            tutorshipIDs.Clear();
+            tutorshipList.Clear();
+            coursesList.Clear();
+            sessionList.Clear();
 
+            tutorshipIDs = obtainTutorshipIDs();
             tutorshipList = obtainTutorships();
             coursesList = obtainCourses();
             sessionList = obtainSessions();
+
             pendingSessions = 0;
+
+            foreach (int id in tutorshipIDs) {
+                menuTutorHandler.updateTutorshipRating(id);
+            }
+
             foreach (Sesion sesion in sessionList) {
+                sesion.lista_asistentes.Clear();
+                sesion.lista_asistentes = menuTutorHandler.getSessionAssistants(sesion.id, User.Identity.GetUserId());
+
                 if (sesion.estado_sesion == ("Esperando Respuesta")) {
                     pendingSessions++;
                 }
@@ -128,8 +154,30 @@ namespace WebApplication156456.Controllers
 
         public ActionResult SelectCourse(int tutorshipID) {
             updateViewBag();
+            specificTutorshipSessions.Clear();
+            double potentialIncome = 0.0;
+            Tutoria currentTutorship = this.tutorshipList.Find(x => x.tutoria_id == tutorshipID);
+
+            foreach (Sesion sesion in sessionList) {
+                if (sesion.tutoria_id == tutorshipID && (sesion.estado_sesion == "Finalizada" || sesion.estado_sesion == "Cancelada")) {
+                    specificTutorshipSessions.Add(sesion);
+
+                    if (sesion.estado_sesion == "Finalizada") {
+                        if (sesion.lista_asistentes.Count == 1) {
+                            potentialIncome += currentTutorship.tarifa_individual;
+                        } else if (sesion.lista_asistentes.Count > 1) {
+                            potentialIncome += currentTutorship.tarifa_grupal * sesion.lista_asistentes.Count;
+                        }
+                    }
+                }
+            }
+            ViewBag.income = ("₡" + potentialIncome.ToString());
+
+
             List<Tutoria> tutorshipList = ViewBag.tutorshipList;
             ViewBag.currentTutorship = tutorshipList.Find(x => x.tutoria_id == tutorshipID);
+            ViewBag.specificSessions = specificTutorshipSessions;
+            ViewBag.potentialIncome = potentialIncome;
             return View("SelectCourse");
         }
 

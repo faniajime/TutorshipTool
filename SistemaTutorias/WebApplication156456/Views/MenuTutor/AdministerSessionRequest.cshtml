@@ -27,51 +27,59 @@
     <div class="container-fluid overflow-hidden tab-content-space-t-4" style="text-align:left;">
         <div id="id_administerSessionRequest_details">
             <div>
-
                 <h3 class="customHeader">Administrar Sesión</h3>
                 <br />
             </div>
 
             @if (ViewBag.currentSession.estado_sesion == "Finalizada" || ViewBag.currentSession.estado_sesion == "Cancelada") {
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
-                        <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
-                        <br />
-                        <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
-                        <br />
-                        <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
-                        <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
-                        <br />
+                <div class="row list-group-item">
+                    <div class="col-md-6">
+                        <div>
+                            <h4><b>Sigla Curso:</b> @ViewBag.currentSession.curso_id</h4>
+                            <h4><b>Nombre Curso:</b> @ViewBag.currentSessionCourse</h4>
+                            <br />
+                            <h5><b>Modalidad Deseada: </b>@ViewBag.currentSession.modalidad</h5>
+                            <br />
+                            <h5><b>Fecha Inicio: </b>@ViewBag.currentSession.fecha_inicio</h5>
+                            <h5><b>Fecha Finalización: </b>@ViewBag.currentSession.fecha_fin</h5>
+                            <br />
 
-                        @if (ViewBag.currentSession.modalidad == "Virtual") {
-                            <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
-                            <br />
-                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none; color:deepskyblue" cols="120" rows="1" readonly>@ViewBag.currentSession.enlace</textarea>
-                            <br />
-                            <br />
-                        } else {
-                            <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
-                            <br />
-                            <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
-                            <br />
-                            <br />
-                        }
+                            @if (ViewBag.currentSession.modalidad == "Virtual") {
+                                <label for="id_administerSessionRequest_fields_sessionLink">Enlace Sesión</label>
+                                <br />
+                                <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none; color:deepskyblue" cols="120" rows="1" readonly>@ViewBag.currentSession.enlace</textarea>
+                                <br />
+                                <br />
+                            } else {
+                                <label for="id_administerSessionRequest_fields_sessionLink">Dirección Sesión</label>
+                                <br />
+                                <textarea id="id_administerSessionRequest_fields_sessionLink" name="sessionAdress" style="resize:none" cols="120" rows="1" readonly>@ViewBag.currentSession.direccion</textarea>
+                                <br />
+                                <br />
+                            }
 
-                        @if (ViewBag.currentSession.estado_sesion == "Finalizada") {
-                            <label>Estado: <span style="color:greenyellow">@ViewBag.currentSession.estado_sesion</span></label>
-                            <br />
-                            <br />
-                        } else {
-                            <label>Estado: <span style="color:red">@ViewBag.currentSession.estado_sesion</span></label>
-                            <br />
-                            <br />
-                        }
+                            @if (ViewBag.currentSession.estado_sesion == "Finalizada") {
+                                <label>Estado: <span style="color:greenyellow">@ViewBag.currentSession.estado_sesion</span></label>
+                                <br />
+                                <br />
+                            } else {
+                                <label>Estado: <span style="color:red">@ViewBag.currentSession.estado_sesion</span></label>
+                                <br />
+                                <br />
+                            }
 
-                        @if (ViewBag.currentSession.evaluacion_sesion == 0) {
-                            <label>Calificación: <span style="color:orange">Sin Calificar</span></label>
-                        } else {
-                            <label>Calificación: <span style="color:green">ViewBag.currentSession.evaluacion_sesion</span></label>
+                            @if (ViewBag.currentSession.evaluacion_sesion == 0) {
+                                <label>Calificación: <span style="color:orange">Sin Calificar</span></label>
+                            } else {
+                                <label>Calificación: <span style="color:green">@ViewBag.currentSession.evaluacion_sesion</span></label>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><b>Asistentes: @ViewBag.currentSession.lista_asistentes.Count</b></h4>
+
+                        @for (int index = 0; index < ViewBag.currentSession.lista_asistentes.Count; index++) { 
+                            <p>@(index+1) - @ViewBag.currentSession.lista_asistentes[index].nombre_estudiante @ViewBag.currentSession.lista_asistentes[index].apellido_estudiante </p>
                         }
                     </div>
                 </div>
