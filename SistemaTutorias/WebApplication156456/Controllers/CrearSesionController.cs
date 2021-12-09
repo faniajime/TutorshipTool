@@ -37,7 +37,7 @@ namespace WebApplication156456.Controllers
             var exito = (string)TempData["exito"];
             TempData["modalidad"] = tutoria.tipo_sesion;
             ViewBag.exito = exito;
-            var lista_sesiones = sesiones.getOpenSesions(tutoriaId);
+            var lista_sesiones = sesiones.getOpenSesions(tutoriaId, User.Identity.GetUserId());
             List<Sesion> sesiones_vacias = new List<Sesion>();
             foreach (Sesion ses in lista_sesiones)
             {
@@ -112,7 +112,6 @@ namespace WebApplication156456.Controllers
             int result = sesiones.crearSesion(sesion);
             if(result > 0)
             {
-                sesiones.inscribirEstudiante(sesion.estudiante_id, result);
                 return RedirectToAction("CreacionExitosa", "CrearSesion", new { result = true, tutoriaID = sesion.tutoria_id, contrasena = sesion.contrasena});
             }
             else
@@ -124,35 +123,33 @@ namespace WebApplication156456.Controllers
 
         public ActionResult inscribirse( int sesionID, int estudianteID, string password)
         {
-            Sesion sesion = sesiones.getSesion(sesionID);
+            Sesion sesion = sesiones.getSesion(sesionID, User.Identity.GetUserId());
             int estudiante_id = sesiones.getStudentID(User.Identity.GetUserId());
-            var exito = "";
-            if (estudiante_id == sesion.estudiante_id || sesiones.inscrito(estudianteID, sesionID))
-            {
-                TempData["exito"] = "inscrito";
-                return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso});
-            }
-            if(sesion.privacidad == "Privada")
-            {
-                if (Equals(sesion.contrasena, password))
-                {
+
+            if ((sesion.lista_asistentes.Find(x => x.id_estudiante == estudiante_id)) == null) {
+                var exito = "";
+
+                if (estudiante_id == sesion.estudiante_id || sesiones.inscrito(estudianteID, sesionID)) {
+                    TempData["exito"] = "inscrito";
+                    return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
+                }
+                if (sesion.privacidad == "Privada") {
+                    if (Equals(sesion.contrasena, password)) {
+                        sesiones.inscribirEstudiante(estudiante_id, sesion.id);
+                        TempData["exito"] = "exito";
+                        return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
+                    } else {
+                        TempData["exito"] = "fallo";
+                        return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
+                    }
+                } else {
                     sesiones.inscribirEstudiante(estudiante_id, sesion.id);
                     TempData["exito"] = "exito";
-                    return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
-                }
-                else
-                {
-                    TempData["exito"] = "fallo";
-                    return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
                 }
             }
-            else{
-                sesiones.inscribirEstudiante(estudiante_id, sesion.id);
-                TempData["exito"] = "exito";
-            }
+
             TempData["exito"] = "fallo";
             return RedirectToAction("Index", "CrearSesion", new { tutoriaID = sesion.tutoria_id, courseID = sesion.curso_id, courseName = sesion.nombre_curso });
-
         }
 
         public ActionResult CreacionExitosa(bool result, int tutoriaID, string contrasena)
