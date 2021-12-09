@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebApplication156456.Models
 {
-    public class Tutor
+    public class Tutor : Persona
     {
         public string id { get; set; }
         public string region_provinc { get; set; }
