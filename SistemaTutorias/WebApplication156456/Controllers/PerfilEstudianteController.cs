@@ -33,7 +33,7 @@ namespace WebApplication156456.Controllers
 
         public ActionResult Evaluar(int idSesion, string thiserror = "false")
         {
-            Sesion sesion = sesionHandler.getSesion(idSesion);
+            Sesion sesion = sesionHandler.getSesion(idSesion, User.Identity.GetUserId());
             ViewBag.estudianteID = sesionHandler.getStudentID(User.Identity.GetUserId());
             ViewBag.sesion = sesion;
             ViewBag.error = thiserror;
