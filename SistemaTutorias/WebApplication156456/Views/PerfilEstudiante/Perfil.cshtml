@@ -10,6 +10,14 @@
     <title>Perfil de estudiante</title>
 </head>
 <body>
+    <br /><br /><br />
+    <br />
+    @if (ViewBag.thiserror == "true")
+    {
+        <div class="alert alert-success" role="alert">
+            Se evaluó la sesión correctamente.
+        </div>
+    }
     <div class="container">
         <h1>Sesiones </h1>
     </div>
@@ -66,11 +74,12 @@
                                 <div class="row">
                                     <div class="col-md-4"><p class="card-text"> @ViewBag.sesions[index].fecha_fin</p></div>
                                     <div class="col-md-4"><p class="card-text"> @ViewBag.sesions[index].tarifa_individual</p></div>
-                                    <div class="col-md-4"><p class="card-text"> @ViewBag.sesions[index].fecha_inicio</p></div>
+                                    <div class="col-md-4"><p class="card-text"> @ViewBag.sesions[index].tarifa_grupal</p></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><b>Estado de la sesion:</b></div>
                                     <div class="col-md-4"><b>Calificación de la sesión:</b></div>
+                                    <div class="col-md-4"><b>Privacidad y contraseña de sesión:</b></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"><p class="card-text"><b><span style="color:green">@ViewBag.sesions[index].estado_sesion</span></b></p></div>
@@ -90,7 +99,10 @@
                                             }
                                         </p>
                                     </div>
+                                    <div class="col-md-4"><p class="card-text">@ViewBag.sesions[index].privacidad  ||<span style="color:darkred"><b> @ViewBag.sesions[index].contrasena </b></span> </p></div>
                                 </div>
+
+
                             </div>
                         </div>
                     }
@@ -237,6 +249,17 @@
                                         </p>
                                     </div>
                                 </div>
+                                @if (@ViewBag.sesions[index].estado_sesion == "Finalizada")
+                                {
+                                    <div class="row">
+                                        <div class="col-md-4"><b>Evaluar sesión:</b> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4"><a href="@Url.Action("Evaluar","PerfilEstudiante",new { idSesion = @ViewBag.sesions[index].id})" class="card-link">    Evaluar</a> </div>
+                                        <br />
+                                        <br />
+                                    </div>
+                                }
                                 <!--<a href="@Url.Action("Index","DisponibilidadSesion",  new { id = @ViewBag.sesions[index].id})" class=" btn btn-primary">Eliminar</a>-->
                             </div>
                         </div>
