@@ -7,6 +7,7 @@ namespace WebApplication156456.Models
     {
         [Required]
         [Display(Name = "Email")]
+        private string something {get;set;}
         public string Email { get; set; }
     }
 
